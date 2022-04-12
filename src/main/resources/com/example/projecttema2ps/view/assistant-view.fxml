@@ -78,7 +78,14 @@
                 </Tab>
                 <Tab text="Make appointment">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ADD8E6;" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ADD8E6;">
+                     <children>
+                        <ComboBox fx:id="medFileAppointmentComboBox" layoutX="24.0" layoutY="21.0" prefWidth="150.0" promptText="Medical file ids" />
+                        <DatePicker fx:id="datePicker" layoutX="191.0" layoutY="22.0" />
+                        <Button layoutX="398.0" layoutY="23.0" mnemonicParsing="false" onAction="#createNewConsultClick" style="-fx-background-color: #87CEFA;" text="Create new consult" />
+                        <ComboBox fx:id="doctorAppointmentComboBox" layoutX="24.0" layoutY="60.0" prefWidth="150.0" promptText="Doctor ids" />
+                        <TextField fx:id="tfConsultHour" layoutX="191.0" layoutY="61.0" promptText="Choose consult hour" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;"  />
+                     </children></AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Statistics">

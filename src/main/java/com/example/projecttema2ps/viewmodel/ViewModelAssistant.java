@@ -1,10 +1,12 @@
 package com.example.projecttema2ps.viewmodel;
 import com.example.projecttema2ps.model.Doctor;
+import com.example.projecttema2ps.model.MedicalFile;
 import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.model.Animal;
 import com.example.projecttema2ps.model.Consult;
 import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.dao.ConsultDAO;
+import com.example.projecttema2ps.model.jdbc.dao.MedicalFileDAO;
 import com.example.projecttema2ps.viewmodel.command.commandsAssistant.*;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -67,15 +69,26 @@ public class ViewModelAssistant {
     @FXML
     public ComboBox comboboxFilterSpecies;
 
+    // tab 3
+    @FXML
+    public ComboBox medFileAppointmentComboBox;
+    @FXML
+    public DatePicker datePicker;
+
     // tab 4
     @FXML
     public PieChart speciesChart;
     @FXML
     public PieChart diagnoseChart;
+    @FXML
+    public ComboBox doctorAppointmentComboBox;
+    @FXML
+    public TextField tfConsultHour;
 
     public ConsultDAO consultDAO = new ConsultDAO();
     public AnimalDAO animalDAO = new AnimalDAO();
     public DoctorDAO doctorDAO = new DoctorDAO();
+    public MedicalFileDAO medicalFileDAO = new MedicalFileDAO();
 
     public void initialize() throws SQLException, IOException {
         animalTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -93,6 +106,9 @@ public class ViewModelAssistant {
             for (Doctor doctor : doctorList) {
                 if (!comboBoxFilterDoctor.getItems().contains(doctor.getName())) {
                     comboBoxFilterDoctor.getItems().add(doctor.getName());
+                }
+                if (!doctorAppointmentComboBox.getItems().contains(doctor.getId())) {
+                    doctorAppointmentComboBox.getItems().add(doctor.getId());
                 }
             }
             for (Consult consult : consultList) {
@@ -116,9 +132,16 @@ public class ViewModelAssistant {
         } catch (Exception e) {
             e.printStackTrace();
         }
-
         refreshStatistics();
 
+        try {
+            List<MedicalFile> medicalFileList = medicalFileDAO.getMedicalFiles();
+            for (MedicalFile medicalFile : medicalFileList) {
+                medFileAppointmentComboBox.getItems().add(medicalFile.getId());
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 
     public void refreshStatistics() throws SQLException, IOException {
@@ -175,10 +198,20 @@ public class ViewModelAssistant {
         new SaveXMLCommand(this).execute();
     }
 
+    @FXML
+    public void createNewConsultClick(ActionEvent actionEvent) throws SQLException, IOException {
+        new CreateNewConsult(this).execute();
+    }
+
     ///////// getters ///////
     public String getTfEditAnimalName() {
         return tfUpdateName.getText();
     }
+
+    public String getTfChooseHour() {
+        return tfConsultHour.getText();
+    }
+
 
     public String getTfNewId() {
         return tfNewId.getText();
@@ -215,5 +248,4 @@ public class ViewModelAssistant {
     public TableView getFilterAnimalTableView() {
         return filterAnimalTableView;
     }
-
 }

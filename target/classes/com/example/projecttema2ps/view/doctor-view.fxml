@@ -2,6 +2,7 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projecttema2ps.viewmodel.ViewModelDoctor">
     <center>
@@ -9,14 +10,14 @@
             <tabs>
                 <Tab text="Medical files">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0">
-                            <Button layoutX="365.0" layoutY="281.0" mnemonicParsing="false" onAction="#saveClick" prefHeight="29.0" prefWidth="91.0" text="Save" />
-                            <TextField fx:id="tfEditSymptoms" alignment="TOP_CENTER" layoutX="188.0" layoutY="265.0" promptText="Edit symptoms" />
-                            <TextField fx:id="tfEditDiagnose" alignment="TOP_CENTER" layoutX="188.0" layoutY="298.0" prefHeight="10.0" prefWidth="160.0" promptText="Edit diagnose" />
-                            <TextField fx:id="tfEditTreatment" alignment="TOP_CENTER" layoutX="188.0" layoutY="329.0" promptText="Edit treatment" />
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0" style="-fx-background-color: #ADD8E6;">
+                            <Button layoutX="380.0" layoutY="281.0" mnemonicParsing="false" onAction="#saveClick" prefHeight="29.0" prefWidth="91.0" style="-fx-background-color: #87CEFA;" text="Save" />
+                            <TextField fx:id="tfEditSymptoms" alignment="TOP_CENTER" layoutX="203.0" layoutY="265.0" promptText="Edit symptoms" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                            <TextField fx:id="tfEditDiagnose" alignment="TOP_CENTER" layoutX="203.0" layoutY="298.0" prefHeight="10.0" prefWidth="160.0" promptText="Edit diagnose" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
+                            <TextField fx:id="tfEditTreatment" alignment="TOP_CENTER" layoutX="203.0" layoutY="329.0" promptText="Edit treatment" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
                             <Button layoutX="647.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="62.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
                      <ComboBox fx:id="comboBoxMedicalFiles" layoutX="14.0" layoutY="10.0" prefHeight="26.0" prefWidth="153.0" promptText="Medical files ids" />
-                     <TableView fx:id="animalTable" layoutX="14.0" layoutY="57.0" prefHeight="109.0" prefWidth="266.0">
+                     <TableView fx:id="animalTable" layoutX="14.0" layoutY="57.0" prefHeight="198.0" prefWidth="266.0" style="-fx-background-color: #F0F8FF;">
                        <columns>
                          <TableColumn fx:id="animalIDColumn" prefWidth="40.0" text="ID" />
                          <TableColumn fx:id="animalNameColumn" prefWidth="64.0" text="Name" />
@@ -24,8 +25,11 @@
                          <TableColumn fx:id="animalWeightColumn" text="Weight (kg)" />
                        </columns>
                      </TableView>
-                     <Label layoutX="14.0" layoutY="40.0" prefHeight="17.0" prefWidth="44.0" text="Animal" />
-                     <TableView fx:id="consultsTable" layoutX="291.0" layoutY="57.0" prefHeight="200.0" prefWidth="417.0">
+                     <Label layoutX="14.0" layoutY="40.0" prefHeight="17.0" prefWidth="44.0" text="Animal">
+                        <font>
+                           <Font name="JetBrains Mono Medium" size="12.0" />
+                        </font></Label>
+                     <TableView fx:id="consultsTable" layoutX="291.0" layoutY="57.0" prefHeight="200.0" prefWidth="417.0" style="-fx-background-color: #F0F8FF;">
                        <columns>
                          <TableColumn fx:id="consultsIdColumn" prefWidth="36.0" text="ID" />
                          <TableColumn fx:id="consultIdDocColumn" prefWidth="61.0" text="ID doctor" />
@@ -34,32 +38,38 @@
                          <TableColumn fx:id="consultTreatmentColumn" prefWidth="99.0" text="Treatment" />
                        </columns>
                      </TableView>
-                     <Label layoutX="291.0" layoutY="40.0" text="Consults" />
-                     <Label layoutX="94.0" layoutY="302.0" text="Edit diagnose:" />
-                     <Label layoutX="92.0" layoutY="334.0" text="Edit treatment:" />
-                     <Label layoutX="90.0" layoutY="270.0" text="Edit symptoms:" />
-                     <Button layoutX="365.0" layoutY="323.0" mnemonicParsing="false" onAction="#refreshTableClick" prefHeight="26.0" prefWidth="90.0" text="Refresh table" />
-                     <TextField fx:id="tfIdConsultToUpdate" editable="false" layoutX="14.0" layoutY="265.0" prefHeight="26.0" prefWidth="68.0" promptText="Id consult" />
-                     <Button layoutX="175.0" layoutY="11.0" mnemonicParsing="false" onAction="#showClick" text="Show" />
+                     <Label layoutX="291.0" layoutY="40.0" text="Consults">
+                        <font>
+                           <Font name="JetBrains Mono Medium" size="12.0" />
+                        </font></Label>
+                     <Label layoutX="110.0" layoutY="304.0" text="Edit diagnose:" />
+                     <Label layoutX="108.0" layoutY="335.0" text="Edit treatment:" />
+                     <Label layoutX="105.0" layoutY="271.0" text="Edit symptoms:" />
+                     <Button layoutX="380.0" layoutY="317.0" mnemonicParsing="false" onAction="#refreshTableClick" prefHeight="32.0" prefWidth="91.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
+                     <TextField fx:id="tfIdConsultToUpdate" editable="false" layoutX="14.0" layoutY="265.0" prefHeight="28.0" prefWidth="79.0" promptText="Id consult" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
+                     <Button layoutX="175.0" layoutY="10.0" mnemonicParsing="false" onAction="#showClick" prefHeight="32.0" prefWidth="52.0" style="-fx-background-color: #87CEFA;" text="Show" />
                         </AnchorPane>
                     </content>
                 </Tab>
                 <Tab text="Filter animals">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0" style="-fx-background-color: #ADD8E6;">
                      <children>
                         <ComboBox fx:id="comboBoxFilterDiagnose" layoutX="32.0" layoutY="26.0" prefHeight="26.0" prefWidth="174.0" promptText="Filter by diagnose" />
                         <ComboBox fx:id="comboBoxFilterTreatment" layoutX="223.0" layoutY="26.0" prefHeight="26.0" prefWidth="175.0" promptText="Filter by treatment" />
-                        <TableView fx:id="filterAnimalsTable" layoutX="32.0" layoutY="87.0" prefHeight="209.0" prefWidth="292.0">
+                        <TableView fx:id="filterAnimalsTable" layoutX="32.0" layoutY="87.0" prefHeight="209.0" prefWidth="366.0" style="-fx-background-color: #F0F8FF;">
                           <columns>
                             <TableColumn fx:id="filterIdColumn" prefWidth="51.0" text="ID" />
-                            <TableColumn fx:id="filterNameColumn" text="Name" />
-                            <TableColumn fx:id="filterSpeciesColumn" text="Species" />
-                            <TableColumn fx:id="filterWeightColumn" text="Weight (kg)" />
+                            <TableColumn fx:id="filterNameColumn" prefWidth="89.0" text="Name" />
+                            <TableColumn fx:id="filterSpeciesColumn" prefWidth="94.0" text="Species" />
+                            <TableColumn fx:id="filterWeightColumn" prefWidth="131.0" text="Weight (kg)" />
                           </columns>
                         </TableView>
-                        <Label layoutX="32.0" layoutY="70.0" text="Animals" />
-                        <Button layoutX="421.0" layoutY="27.0" mnemonicParsing="false" onAction="#ShowFilterClick" text="Show" />
+                        <Label layoutX="32.0" layoutY="70.0" text="Animals">
+                           <font>
+                              <Font name="JetBrains Mono Medium" size="12.0" />
+                           </font></Label>
+                        <Button layoutX="421.0" layoutY="19.0" mnemonicParsing="false" onAction="#ShowFilterClick" prefHeight="40.0" prefWidth="63.0" style="-fx-background-color: #87CEFA;" text="Show" />
                         <Button layoutX="633.0" layoutY="304.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
                      </children>
                         </AnchorPane>
@@ -67,23 +77,29 @@
                 </Tab>
                 <Tab text="Work program">
                     <content>
-                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0">
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0" style="-fx-background-color: #ADD8E6;">
                             <children>
-                                <Button contentDisplay="CENTER" layoutX="411.0" layoutY="278.0" mnemonicParsing="false" onAction="#editProgramClick" prefHeight="28.0" prefWidth="93.0" text="Edit program" />
-                                <TableView fx:id="workProgramTableView" layoutX="70.0" layoutY="14.0" prefHeight="261.0" prefWidth="579.0">
+                                <Button contentDisplay="CENTER" layoutX="366.0" layoutY="281.0" mnemonicParsing="false" onAction="#editProgramClick" prefHeight="28.0" prefWidth="93.0" style="-fx-background-color: #87CEFA;" text="Edit program" />
+                                <TableView fx:id="workProgramTableView" layoutX="27.0" layoutY="14.0" prefHeight="261.0" prefWidth="319.0" style="-fx-background-color: #F0F8FF;">
                                     <columns>
                                         <TableColumn fx:id="idWpColumn" prefWidth="43.0" text="Id" />
                                         <TableColumn fx:id="nameWpColumn" prefWidth="83.0" text="Name" />
                                         <TableColumn fx:id="startProgramWpColumn" prefWidth="102.0" text="Start program" />
                                         <TableColumn fx:id="endProgramWpColumn" prefWidth="91.0" text="End program" />
-                                        <TableColumn fx:id="consultsColumn" prefWidth="259.0" text="Consults" />
                                     </columns>
                                 </TableView>
-                                <TextField fx:id="tfEditStartProgram" alignment="TOP_CENTER" layoutX="215.0" layoutY="279.0" promptText="Edit start program" />
-                                <TextField fx:id="tfIdToUpdate" alignment="TOP_CENTER" editable="false" layoutX="71.0" layoutY="279.0" prefHeight="26.0" prefWidth="130.0" promptText="Choose id to update" />
-                                <TextField fx:id="tfEditEndProgram" alignment="TOP_CENTER" layoutX="215.0" layoutY="317.0" promptText="Edit end program" />
-                                <Button layoutX="639.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
-                        <Button layoutX="411.0" layoutY="318.0" mnemonicParsing="false" onAction="#refreshWorkProgramTableClick" text="Refresh table" />
+                                <TextField fx:id="tfEditStartProgram" alignment="TOP_CENTER" layoutX="187.0" layoutY="282.0" promptText="Edit start program" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
+                                <TextField fx:id="tfIdToUpdate" alignment="TOP_CENTER" editable="false" layoutX="27.0" layoutY="282.0" prefHeight="26.0" prefWidth="130.0" promptText="Choose id to update" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
+                                <TextField fx:id="tfEditEndProgram" alignment="TOP_CENTER" layoutX="187.0" layoutY="320.0" promptText="Edit end program" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
+                                <Button layoutX="651.0" layoutY="316.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="36.0" prefWidth="66.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                        <Button layoutX="366.0" layoutY="321.0" mnemonicParsing="false" onAction="#refreshWorkProgramTableClick" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
+                        <TableView fx:id="consultsTableView" layoutX="366.0" layoutY="14.0" prefHeight="261.0" prefWidth="261.0" style="-fx-background-color: #F0F8FF;">
+                          <columns>
+                            <TableColumn fx:id="dateColumn" prefWidth="135.0" text="Consults date" />
+                            <TableColumn fx:id="hourColumn" prefWidth="125.0" text="Consults hour" />
+                          </columns>
+                        </TableView>
+                        <Button layoutX="491.0" layoutY="280.0" mnemonicParsing="false" onAction="#viewConsultsClick" prefHeight="30.0" prefWidth="136.0" style="-fx-background-color: #87CEFA;" text="View consults" />
                             </children></AnchorPane>
                     </content>
                 </Tab>

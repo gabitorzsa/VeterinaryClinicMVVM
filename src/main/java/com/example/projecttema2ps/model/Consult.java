@@ -1,6 +1,6 @@
 package com.example.projecttema2ps.model;
 
-import java.util.Date;
+import java.sql.Date;
 
 public class Consult {
     private int id;
@@ -9,16 +9,9 @@ public class Consult {
     private String treatment;
     private String symptoms;
     private String diagnose;
+    private String hour;
     private int idMedFile;
 
-    public Consult(int idDoctor, Date date, String treatment, String symptoms, String diagnose, MedicalFile mf) {
-        this.idDoctor = idDoctor;
-        this.date = date;
-        this.treatment = treatment;
-        this.symptoms = symptoms;
-        this.diagnose = diagnose;
-        this.idMedFile = mf.getId();
-    }
 
     public Consult(int id, int idDoctor, String treatment, String symptoms, String diagnose, MedicalFile mf) {
         this.id = id;
@@ -65,8 +58,9 @@ public class Consult {
         this.idDoctor = idDoctor;
     }
 
-    public Date getDate() {
-        return date;
+    public String getDate() {
+        String formatDateTime = date.toString();
+        return formatDateTime;
     }
 
     public void setDate(Date date) {
@@ -97,11 +91,20 @@ public class Consult {
         this.diagnose = diagnose;
     }
 
+    public String getHour() {
+        return hour;
+    }
+
+    public void setHour(String hour) {
+        this.hour = hour;
+    }
+
     @Override
     public String toString() {
         return "Consult{" +
                 "idDoctor=" + idDoctor +
-                ", date=" + date +
+                ", date=" + getDate() +
+                ", hour=" + getHour() +
                 ", treatment='" + treatment + '\'' +
                 ", symptoms=" + symptoms +
                 ", diagnose='" + diagnose + '\'' +

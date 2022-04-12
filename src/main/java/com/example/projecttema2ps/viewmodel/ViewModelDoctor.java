@@ -83,25 +83,22 @@ public class ViewModelDoctor {
     @FXML
     public TableColumn endProgramWpColumn;
     @FXML
-    public TableColumn consultsColumn;
-    @FXML
     public TextField tfEditStartProgram;
     @FXML
     public TextField tfIdToUpdate;
     @FXML
     public TextField tfEditEndProgram;
+    @FXML
+    public TableView consultsTableView;
+    @FXML
+    public TableColumn dateColumn;
+    @FXML
+    public TableColumn hourColumn;
 
     MedicalFileDAO medicalFileDAO = new MedicalFileDAO();
     AnimalDAO animalDAO = new AnimalDAO();
     ConsultDAO consultDAO = new ConsultDAO();
     DoctorDAO doctorDAO = new DoctorDAO();
-
-    List<Animal> animalList = animalDAO.getAnimals();
-    List<Consult> consultList = consultDAO.getConsults();
-
-    public ViewModelDoctor() throws SQLException {
-        // functii pt populare combobox + setOnAction Command
-    }
 
     public void initialize() {
         try {
@@ -115,36 +112,42 @@ public class ViewModelDoctor {
         try {
             List<Consult> consultList = consultDAO.getConsults();
             for (Consult consult : consultList) {
-                comboBoxFilterDiagnose.getItems().add(consult.getDiagnose());
-                comboBoxFilterTreatment.getItems().add(consult.getTreatment());
+                if (!comboBoxFilterDiagnose.getItems().contains(consult.getDiagnose()))
+                    comboBoxFilterDiagnose.getItems().add(consult.getDiagnose());
+                if (!comboBoxFilterTreatment.getItems().contains(consult.getTreatment()))
+                    comboBoxFilterTreatment.getItems().add(consult.getTreatment());
             }
+            comboBoxFilterDiagnose.getItems().add("Filter by diagnose");
+            comboBoxFilterTreatment.getItems().add("Filter by treatment");
+
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        // third tab
+        try {
+            List<Doctor> doctorList = doctorDAO.getDoctors();
+            idWpColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
+            nameWpColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
+            startProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("startProgram"));
+            endProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("endProgram"));
+            consultsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
+            dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
+            hourColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));
+            for (Doctor doctor : doctorList) {
+                workProgramTableView.getItems().add(doctor);
+            }
+
+            workProgramTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
+                tfIdToUpdate.setText(Integer.toString(((Doctor) newVal).getId()));
+                tfEditStartProgram.setText(((Doctor) newVal).getStartProgram());
+                tfEditEndProgram.setText(((Doctor) newVal).getEndProgram());
+            });
+
         } catch (SQLException e) {
             e.printStackTrace();
         }
     }
-
-
-//        // third tab
-//        try {
-//            List<Doctor> doctorList = doctorDAO.getDoctors();
-//            idWpColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
-//            nameWpColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-//            startProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("startProgram"));
-//            endProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("endProgram"));
-////            consultsColumn.setCellValueFactory(new PropertyValueFactory<>("consults"));
-//            for (Doctor doctor : doctorList) {
-//                workProgramTableView.getItems().add(doctor);
-//            }
-//            workProgramTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-//                tfIdToUpdate.setText(Integer.toString(((Doctor)newVal).getId()));
-//                tfEditStartProgram.setText(((Doctor)newVal).getStartProgram());
-//                tfEditEndProgram.setText(((Doctor)newVal).getEndProgram());
-//            });
-//
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     @FXML
     public void showClick(ActionEvent actionEvent) throws SQLException, IOException {
@@ -183,6 +186,11 @@ public class ViewModelDoctor {
         new RefreshDoctorTableCommand(this).execute();
     }
 
+    @FXML
+    public void viewConsultsClick(ActionEvent actionEvent) throws SQLException, IOException {
+        new ViewConsultsCommand(this).execute();
+    }
+
     public String getTfEditSymptoms() {
         return tfEditSymptoms.getText();
     }
@@ -209,6 +217,22 @@ public class ViewModelDoctor {
 
     public String getTfEditEndProgram() {
         return tfEditEndProgram.getText();
+    }
+
+    public TableView getFilterAnimalsTable() {
+        return filterAnimalsTable;
+    }
+
+    public ComboBox getComboBoxFilterDiagnose() {
+        return comboBoxFilterDiagnose;
+    }
+
+    public ComboBox getComboBoxFilterTreatment() {
+        return comboBoxFilterTreatment;
+    }
+
+    public TableView getConsultsTable() {
+        return consultsTable;
     }
 }
 

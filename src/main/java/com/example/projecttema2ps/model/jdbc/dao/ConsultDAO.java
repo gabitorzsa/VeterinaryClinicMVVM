@@ -1,6 +1,5 @@
 package com.example.projecttema2ps.model.jdbc.dao;
 
-import com.example.projecttema2ps.model.Animal;
 import com.example.projecttema2ps.model.Consult;
 import com.example.projecttema2ps.model.Doctor;
 import com.example.projecttema2ps.model.MedicalFile;
@@ -20,14 +19,16 @@ public class ConsultDAO implements IConsultDAO {
 
     @Override
     public int addConsult(Consult consult, MedicalFile medicalFile, Doctor doctor) throws SQLException {
-        String query = "insert into consult(consult_id, " + "consult_idDoctor, " + "consult_treatment, " + "consult_diagnose, " + "consult_symptoms, " + "medicalFile_id) values (?,?,?,?,?,?)";
+        String query = "insert into consult(consult_idDoctor, " + "consult_treatment, " + "consult_diagnose, "
+                + "consult_symptoms, " + "consult_date, "+ "consult_hour, " +"medicalFile_id) values (?,?,?,?,?,?,?)";
         PreparedStatement preparedStatement = connection.prepareStatement(query);
-        preparedStatement.setString(1, String.valueOf(index));
-        preparedStatement.setString(2, String.valueOf(doctor.getId()));
-        preparedStatement.setString(3, consult.getTreatment());
-        preparedStatement.setString(4, consult.getDiagnose());
-        preparedStatement.setString(5, consult.getSymptoms());
-        preparedStatement.setString(6, String.valueOf(medicalFile.getId()));
+        preparedStatement.setString(1, String.valueOf(doctor.getId()));
+        preparedStatement.setString(2, consult.getTreatment());
+        preparedStatement.setString(3, consult.getDiagnose());
+        preparedStatement.setString(4, consult.getSymptoms());
+        preparedStatement.setString(5, String.valueOf(consult.getDate()));
+        preparedStatement.setString(6, consult.getHour());
+        preparedStatement.setString(7, String.valueOf(medicalFile.getId()));
         int n = preparedStatement.executeUpdate();
         index++;
         return n;
@@ -69,6 +70,8 @@ public class ConsultDAO implements IConsultDAO {
             consult.setDiagnose(resultSet.getString("consult_diagnose"));
             consult.setTreatment(resultSet.getString("consult_treatment"));
             consult.setSymptoms(resultSet.getString("consult_symptoms"));
+            consult.setDate(resultSet.getDate("consult_date"));
+            consult.setHour(resultSet.getString("consult_hour"));
             consult.setIdMedFile(resultSet.getInt("medicalFile_id"));
         }
         if (check == true) {
@@ -90,6 +93,8 @@ public class ConsultDAO implements IConsultDAO {
             consult.setDiagnose(resultSet.getString("consult_diagnose"));
             consult.setTreatment(resultSet.getString("consult_treatment"));
             consult.setSymptoms(resultSet.getString("consult_symptoms"));
+            consult.setDate(resultSet.getDate("consult_date"));
+            consult.setHour(resultSet.getString("consult_hour"));
             consult.setIdMedFile(resultSet.getInt("medicalFile_id"));
             consultList.add(consult);
         }
