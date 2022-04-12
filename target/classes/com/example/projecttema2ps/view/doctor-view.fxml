@@ -15,7 +15,7 @@
                             <TextField fx:id="tfEditSymptoms" alignment="TOP_CENTER" layoutX="203.0" layoutY="265.0" promptText="Edit symptoms" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
                             <TextField fx:id="tfEditDiagnose" alignment="TOP_CENTER" layoutX="203.0" layoutY="298.0" prefHeight="10.0" prefWidth="160.0" promptText="Edit diagnose" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
                             <TextField fx:id="tfEditTreatment" alignment="TOP_CENTER" layoutX="203.0" layoutY="329.0" promptText="Edit treatment" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
-                            <Button layoutX="647.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="62.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                            <Button layoutX="645.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
                      <ComboBox fx:id="comboBoxMedicalFiles" layoutX="14.0" layoutY="10.0" prefHeight="26.0" prefWidth="153.0" promptText="Medical files ids" />
                      <TableView fx:id="animalTable" layoutX="14.0" layoutY="57.0" prefHeight="198.0" prefWidth="266.0" style="-fx-background-color: #F0F8FF;">
                        <columns>
@@ -70,7 +70,7 @@
                               <Font name="JetBrains Mono Medium" size="12.0" />
                            </font></Label>
                         <Button layoutX="421.0" layoutY="19.0" mnemonicParsing="false" onAction="#ShowFilterClick" prefHeight="40.0" prefWidth="63.0" style="-fx-background-color: #87CEFA;" text="Show" />
-                        <Button layoutX="633.0" layoutY="304.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                         <Button layoutX="645.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
                      </children>
                         </AnchorPane>
                     </content>
@@ -80,20 +80,19 @@
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0" style="-fx-background-color: #ADD8E6;">
                             <children>
                                 <Button contentDisplay="CENTER" layoutX="366.0" layoutY="281.0" mnemonicParsing="false" onAction="#editProgramClick" prefHeight="28.0" prefWidth="93.0" style="-fx-background-color: #87CEFA;" text="Edit program" />
-                                <TableView fx:id="workProgramTableView" layoutX="27.0" layoutY="14.0" prefHeight="261.0" prefWidth="319.0" style="-fx-background-color: #F0F8FF;">
+                                <TableView fx:id="workProgramTableView" layoutX="27.0" layoutY="14.0" prefHeight="261.0" prefWidth="374.0" style="-fx-background-color: #F0F8FF;">
                                     <columns>
                                         <TableColumn fx:id="idWpColumn" prefWidth="43.0" text="Id" />
-                                        <TableColumn fx:id="nameWpColumn" prefWidth="83.0" text="Name" />
+                                        <TableColumn fx:id="nameWpColumn" prefWidth="128.0" text="Name" />
                                         <TableColumn fx:id="startProgramWpColumn" prefWidth="102.0" text="Start program" />
-                                        <TableColumn fx:id="endProgramWpColumn" prefWidth="91.0" text="End program" />
+                                        <TableColumn fx:id="endProgramWpColumn" prefWidth="100.0" text="End program" />
                                     </columns>
                                 </TableView>
                                 <TextField fx:id="tfEditStartProgram" alignment="TOP_CENTER" layoutX="86.0" layoutY="282.0" prefHeight="28.0" prefWidth="117.0" promptText="Edit start program" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
                                 <TextField fx:id="tfIdToUpdate" alignment="TOP_CENTER" editable="false" layoutX="27.0" layoutY="282.0" prefHeight="28.0" prefWidth="44.0" promptText="Id" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
                                 <TextField fx:id="tfEditEndProgram" alignment="TOP_CENTER" layoutX="218.0" layoutY="282.0" prefHeight="28.0" prefWidth="128.0" promptText="Edit end program" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black; " />
-                                <Button layoutX="651.0" layoutY="316.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="36.0" prefWidth="66.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
-                        <Button layoutX="366.0" layoutY="321.0" mnemonicParsing="false" onAction="#refreshWorkProgramTableClick" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
-                        <TableView fx:id="consultsTableView" layoutX="366.0" layoutY="14.0" prefHeight="261.0" prefWidth="261.0" style="-fx-background-color: #F0F8FF;">
+                                <Button layoutX="645.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />                        <Button layoutX="366.0" layoutY="321.0" mnemonicParsing="false" onAction="#refreshWorkProgramTableClick" prefHeight="29.0" prefWidth="92.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
+                        <TableView fx:id="consultsTableView" layoutX="412.0" layoutY="14.0" prefHeight="261.0" prefWidth="261.0" style="-fx-background-color: #F0F8FF;">
                           <columns>
                             <TableColumn fx:id="dateColumn" prefWidth="135.0" text="Consults date" />
                             <TableColumn fx:id="hourColumn" prefWidth="125.0" text="Consults hour" />

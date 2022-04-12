@@ -27,8 +27,7 @@
                                 <TextField fx:id="tfPassword" alignment="TOP_CENTER" layoutX="108.0" layoutY="325.0" prefHeight="26.0" prefWidth="168.0" promptText="Password" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
                                 <Button layoutX="318.0" layoutY="264.0" mnemonicParsing="false" onAction="#deleteUserClick" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #87CEFA;" text="Delete" />
                                 <Button layoutX="318.0" layoutY="226.0" mnemonicParsing="false" onAction="#saveUserClick" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #87CEFA;" text="Save" />
-                                <Button layoutX="649.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="43.0" prefWidth="71.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
-                        <Button layoutX="318.0" layoutY="304.0" mnemonicParsing="false" onAction="#refreshUsersTableClick" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
+                                <Button layoutX="645.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />                        <Button layoutX="318.0" layoutY="304.0" mnemonicParsing="false" onAction="#refreshUsersTableClick" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
                             </children>
                         </AnchorPane>
                     </children>
@@ -58,8 +57,7 @@
                         <TextField fx:id="tfStartProgram" alignment="TOP_CENTER" editable="false" layoutX="360.0" layoutY="213.0" opacity="0.42" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" text="No info yet" />
                         <TextField fx:id="tfEndProgram" alignment="TOP_CENTER" editable="false" layoutX="360.0" layoutY="257.0" opacity="0.42" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" text="No info yet" />
                         <Button layoutX="545.0" layoutY="255.0" mnemonicParsing="false" onAction="#deleteDoctorClick" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #87CEFA;" text="Delete" />
-                        <Button layoutX="649.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="43.0" prefWidth="71.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
-                        <Label layoutX="270.0" layoutY="218.0" text="Start program: " />
+                        <Button layoutX="645.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />                        <Label layoutX="270.0" layoutY="218.0" text="Start program: " />
                         <Label layoutX="272.0" layoutY="262.0" text="End program:" />
                   <Button layoutX="545.0" layoutY="213.0" mnemonicParsing="false" onAction="#saveDoctorClick" prefHeight="30.0" prefWidth="90.0" style="-fx-background-color: #87CEFA;" text="Save" />
                   <Button layoutX="545.0" layoutY="297.0" mnemonicParsing="false" onAction="#refreshDoctorsTableClick" style="-fx-background-color: #87CEFA;" text="Refresh table" />

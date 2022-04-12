@@ -1,4 +1,6 @@
 package com.example.projecttema2ps.viewmodel;
+
+import com.example.projecttema2ps.model.Animal;
 import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.dao.ConsultDAO;
@@ -8,6 +10,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
 import javafx.scene.control.*;
+import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -68,6 +71,16 @@ public class ViewModelAssistant {
     private ComboBox medFileAppointmentComboBox;
     @FXML
     private DatePicker datePicker;
+    @FXML
+    private TableColumn idAppointmentColumn;
+    @FXML
+    private TableColumn animalAppointmentColumn;
+    @FXML
+    private TableColumn speciesAppointmentColumn;
+    @FXML
+    private TableColumn weightAppointmentColumn;
+    @FXML
+    private TableView animalAppointmentTableView;
 
     // tab 4
     @FXML
@@ -146,6 +159,11 @@ public class ViewModelAssistant {
     @FXML
     public void createNewConsultClick(ActionEvent actionEvent) throws SQLException, IOException {
         new CreateNewConsult(this).execute();
+    }
+
+    @FXML
+    public void showAnimalClick(ActionEvent actionEvent) throws SQLException, IOException {
+        new ShowAnimalCommand(this).execute();
     }
 
     public ConsultDAO getConsultDAO() {
@@ -244,155 +262,96 @@ public class ViewModelAssistant {
         this.tfIdMedFile.setText(tfIdMedFile);
     }
 
-    public void setTfConsultHour(String tfConsultHour) {
-        this.tfConsultHour.setText(tfConsultHour);
-    }
-
     public TableView getAnimalTableView() {
         return animalTableView;
-    }
-
-    public void setAnimalTableView(TableView animalTableView) {
-        this.animalTableView = animalTableView;
     }
 
     public TableColumn getIdColumn() {
         return idColumn;
     }
 
-    public void setIdColumn(TableColumn idColumn) {
-        this.idColumn = idColumn;
-    }
-
     public TableColumn getAnimalColumn() {
         return animalColumn;
-    }
-
-    public void setAnimalColumn(TableColumn animalColumn) {
-        this.animalColumn = animalColumn;
     }
 
     public TableColumn getSpeciesColumn() {
         return speciesColumn;
     }
 
-    public void setSpeciesColumn(TableColumn speciesColumn) {
-        this.speciesColumn = speciesColumn;
-    }
-
     public TableColumn getWeightColumn() {
         return weightColumn;
-    }
-
-    public void setWeightColumn(TableColumn weightColumn) {
-        this.weightColumn = weightColumn;
     }
 
     public TableColumn getIdMedFileColumn() {
         return idMedFileColumn;
     }
 
-    public void setIdMedFileColumn(TableColumn idMedFileColumn) {
-        this.idMedFileColumn = idMedFileColumn;
-    }
-
-    public void setFilterAnimalTableView(TableView filterAnimalTableView) {
-        this.filterAnimalTableView = filterAnimalTableView;
-    }
-
     public TableColumn getIdFilterColumn() {
         return idFilterColumn;
-    }
-
-    public void setIdFilterColumn(TableColumn idFilterColumn) {
-        this.idFilterColumn = idFilterColumn;
     }
 
     public TableColumn getAnimalFilterColumn() {
         return animalFilterColumn;
     }
 
-    public void setAnimalFilterColumn(TableColumn animalFilterColumn) {
-        this.animalFilterColumn = animalFilterColumn;
-    }
-
     public TableColumn getSpeciesFilterColumn() {
         return speciesFilterColumn;
-    }
-
-    public void setSpeciesFilterColumn(TableColumn speciesFilterColumn) {
-        this.speciesFilterColumn = speciesFilterColumn;
     }
 
     public TableColumn getWeightFilterColumn() {
         return weightFilterColumn;
     }
 
-    public void setWeightFilterColumn(TableColumn weightFilterColumn) {
-        this.weightFilterColumn = weightFilterColumn;
-    }
-
     public ComboBox getComboBoxFilterDoctor() {
         return comboBoxFilterDoctor;
-    }
-
-    public void setComboBoxFilterDoctor(ComboBox comboBoxFilterDoctor) {
-        this.comboBoxFilterDoctor = comboBoxFilterDoctor;
     }
 
     public ComboBox getComboboxFilterDiagnose() {
         return comboboxFilterDiagnose;
     }
 
-    public void setComboboxFilterDiagnose(ComboBox comboboxFilterDiagnose) {
-        this.comboboxFilterDiagnose = comboboxFilterDiagnose;
-    }
-
     public ComboBox getComboboxFilterSpecies() {
         return comboboxFilterSpecies;
-    }
-
-    public void setComboboxFilterSpecies(ComboBox comboboxFilterSpecies) {
-        this.comboboxFilterSpecies = comboboxFilterSpecies;
     }
 
     public ComboBox getMedFileAppointmentComboBox() {
         return medFileAppointmentComboBox;
     }
 
-    public void setMedFileAppointmentComboBox(ComboBox medFileAppointmentComboBox) {
-        this.medFileAppointmentComboBox = medFileAppointmentComboBox;
-    }
-
     public DatePicker getDatePicker() {
         return datePicker;
-    }
-
-    public void setDatePicker(DatePicker datePicker) {
-        this.datePicker = datePicker;
     }
 
     public PieChart getSpeciesChart() {
         return speciesChart;
     }
 
-    public void setSpeciesChart(PieChart speciesChart) {
-        this.speciesChart = speciesChart;
-    }
-
     public PieChart getDiagnoseChart() {
         return diagnoseChart;
-    }
-
-    public void setDiagnoseChart(PieChart diagnoseChart) {
-        this.diagnoseChart = diagnoseChart;
     }
 
     public ComboBox getDoctorAppointmentComboBox() {
         return doctorAppointmentComboBox;
     }
 
-    public void setDoctorAppointmentComboBox(ComboBox doctorAppointmentComboBox) {
-        this.doctorAppointmentComboBox = doctorAppointmentComboBox;
+    public TableColumn getIdAppointmentColumn() {
+        return idAppointmentColumn;
     }
+
+    public TableColumn getAnimalAppointmentColumn() {
+        return animalAppointmentColumn;
+    }
+
+    public TableColumn getSpeciesAppointmentColumn() {
+        return speciesAppointmentColumn;
+    }
+
+    public TableColumn getWeightAppointmentColumn() {
+        return weightAppointmentColumn;
+    }
+
+    public TableView getAnimalAppointmentTableView() {
+        return animalAppointmentTableView;
+    }
+
 }

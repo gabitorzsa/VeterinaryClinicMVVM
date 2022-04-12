@@ -27,11 +27,5 @@ public class AddUserCommand implements ICommand {
         newUser.setUsername(viewModelAdmin.getTfUsername());
         newUser.setPassword(viewModelAdmin.getTfPassword());
         userDAO.addUser(newUser);
-
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("");
-        alert.setHeaderText("");
-        alert.setContentText("To see the updates made please press 'Refresh table' button");
-        alert.showAndWait();
     }
 }

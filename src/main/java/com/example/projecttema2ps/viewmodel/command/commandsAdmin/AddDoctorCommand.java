@@ -31,10 +31,5 @@ public class AddDoctorCommand implements ICommand {
         newDoctor.setStartProgram("No info yet");
         newDoctor.setEndProgram("No info yet");
         doctorDAO.addDoctor(newDoctor);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("");
-        alert.setHeaderText("");
-        alert.setContentText("To see the updates made please press 'Refresh table' button");
-        alert.showAndWait();
     }
 }
