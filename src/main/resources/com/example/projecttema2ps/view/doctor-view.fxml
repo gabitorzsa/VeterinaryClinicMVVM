@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.0" prefWidth="731.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projecttema2ps.viewmodel.ViewModelDoctor">
+    <center>
+        <TabPane prefHeight="400.0" prefWidth="741.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
+            <tabs>
+                <Tab text="Medical files">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0">
+                            <Button layoutX="365.0" layoutY="281.0" mnemonicParsing="false" onAction="#saveClick" prefHeight="29.0" prefWidth="91.0" text="Save" />
+                            <TextField fx:id="tfEditSymptoms" alignment="TOP_CENTER" layoutX="188.0" layoutY="265.0" promptText="Edit symptoms" />
+                            <TextField fx:id="tfEditDiagnose" alignment="TOP_CENTER" layoutX="188.0" layoutY="298.0" prefHeight="10.0" prefWidth="160.0" promptText="Edit diagnose" />
+                            <TextField fx:id="tfEditTreatment" alignment="TOP_CENTER" layoutX="188.0" layoutY="329.0" promptText="Edit treatment" />
+                            <Button layoutX="647.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="62.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                     <ComboBox fx:id="comboBoxMedicalFiles" layoutX="14.0" layoutY="10.0" prefHeight="26.0" prefWidth="153.0" promptText="Medical files ids" />
+                     <TableView fx:id="animalTable" layoutX="14.0" layoutY="57.0" prefHeight="109.0" prefWidth="266.0">
+                       <columns>
+                         <TableColumn fx:id="animalIDColumn" prefWidth="40.0" text="ID" />
+                         <TableColumn fx:id="animalNameColumn" prefWidth="64.0" text="Name" />
+                         <TableColumn fx:id="animalSpeciesColumn" prefWidth="82.0" text="Species" />
+                         <TableColumn fx:id="animalWeightColumn" text="Weight (kg)" />
+                       </columns>
+                     </TableView>
+                     <Label layoutX="14.0" layoutY="40.0" prefHeight="17.0" prefWidth="44.0" text="Animal" />
+                     <TableView fx:id="consultsTable" layoutX="291.0" layoutY="57.0" prefHeight="200.0" prefWidth="417.0">
+                       <columns>
+                         <TableColumn fx:id="consultsIdColumn" prefWidth="36.0" text="ID" />
+                         <TableColumn fx:id="consultIdDocColumn" prefWidth="61.0" text="ID doctor" />
+                         <TableColumn fx:id="consultSymptomsColumn" prefWidth="112.0" text="Symptoms" />
+                         <TableColumn fx:id="consultDiagnoseColumn" prefWidth="108.0" text="Diagnose" />
+                         <TableColumn fx:id="consultTreatmentColumn" prefWidth="99.0" text="Treatment" />
+                       </columns>
+                     </TableView>
+                     <Label layoutX="291.0" layoutY="40.0" text="Consults" />
+                     <Label layoutX="94.0" layoutY="302.0" text="Edit diagnose:" />
+                     <Label layoutX="92.0" layoutY="334.0" text="Edit treatment:" />
+                     <Label layoutX="90.0" layoutY="270.0" text="Edit symptoms:" />
+                     <Button layoutX="365.0" layoutY="323.0" mnemonicParsing="false" onAction="#refreshTableClick" prefHeight="26.0" prefWidth="90.0" text="Refresh table" />
+                     <TextField fx:id="tfIdConsultToUpdate" editable="false" layoutX="14.0" layoutY="265.0" prefHeight="26.0" prefWidth="68.0" promptText="Id consult" />
+                     <Button layoutX="175.0" layoutY="11.0" mnemonicParsing="false" onAction="#showClick" text="Show" />
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Filter animals">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0">
+                     <children>
+                        <ComboBox fx:id="comboBoxFilterDiagnose" layoutX="32.0" layoutY="26.0" prefHeight="26.0" prefWidth="174.0" promptText="Filter by diagnose" />
+                        <ComboBox fx:id="comboBoxFilterTreatment" layoutX="223.0" layoutY="26.0" prefHeight="26.0" prefWidth="175.0" promptText="Filter by treatment" />
+                        <TableView fx:id="filterAnimalsTable" layoutX="32.0" layoutY="87.0" prefHeight="209.0" prefWidth="292.0">
+                          <columns>
+                            <TableColumn fx:id="filterIdColumn" prefWidth="51.0" text="ID" />
+                            <TableColumn fx:id="filterNameColumn" text="Name" />
+                            <TableColumn fx:id="filterSpeciesColumn" text="Species" />
+                            <TableColumn fx:id="filterWeightColumn" text="Weight (kg)" />
+                          </columns>
+                        </TableView>
+                        <Label layoutX="32.0" layoutY="70.0" text="Animals" />
+                        <Button layoutX="421.0" layoutY="27.0" mnemonicParsing="false" onAction="#ShowFilterClick" text="Show" />
+                        <Button layoutX="633.0" layoutY="304.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="41.0" prefWidth="76.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                     </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Work program">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="400.0" prefWidth="741.0">
+                            <children>
+                                <Button contentDisplay="CENTER" layoutX="411.0" layoutY="278.0" mnemonicParsing="false" onAction="#editProgramClick" prefHeight="28.0" prefWidth="93.0" text="Edit program" />
+                                <TableView fx:id="workProgramTableView" layoutX="70.0" layoutY="14.0" prefHeight="261.0" prefWidth="579.0">
+                                    <columns>
+                                        <TableColumn fx:id="idWpColumn" prefWidth="43.0" text="Id" />
+                                        <TableColumn fx:id="nameWpColumn" prefWidth="83.0" text="Name" />
+                                        <TableColumn fx:id="startProgramWpColumn" prefWidth="102.0" text="Start program" />
+                                        <TableColumn fx:id="endProgramWpColumn" prefWidth="91.0" text="End program" />
+                                        <TableColumn fx:id="consultsColumn" prefWidth="259.0" text="Consults" />
+                                    </columns>
+                                </TableView>
+                                <TextField fx:id="tfEditStartProgram" alignment="TOP_CENTER" layoutX="215.0" layoutY="279.0" promptText="Edit start program" />
+                                <TextField fx:id="tfIdToUpdate" alignment="TOP_CENTER" editable="false" layoutX="71.0" layoutY="279.0" prefHeight="26.0" prefWidth="130.0" promptText="Choose id to update" />
+                                <TextField fx:id="tfEditEndProgram" alignment="TOP_CENTER" layoutX="215.0" layoutY="317.0" promptText="Edit end program" />
+                                <Button layoutX="639.0" layoutY="310.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="40.0" prefWidth="70.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                        <Button layoutX="411.0" layoutY="318.0" mnemonicParsing="false" onAction="#refreshWorkProgramTableClick" text="Refresh table" />
+                            </children></AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </center>
+</BorderPane>

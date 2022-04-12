@@ -1,0 +1,18 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<animals>
+    <animal id="3" idMedFile="3">
+        <name>Thor</name>
+        <species>Catlike</species>
+        <weights>5.0</weights>
+    </animal>
+    <animal id="6" idMedFile="17">
+        <name>Hugo</name>
+        <species>Rodent</species>
+        <weights>3.7</weights>
+    </animal>
+    <animal id="10" idMedFile="23">
+        <name>Zoro</name>
+        <species>Rodent</species>
+        <weights>1.4</weights>
+    </animal>
+</animals>

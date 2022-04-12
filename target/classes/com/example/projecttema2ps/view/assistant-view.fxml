@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projecttema2ps.viewmodel.ViewModelAssistant">
+    <children>
+        <TabPane layoutX="-1.0" layoutY="-1.0" prefHeight="399.0" prefWidth="741.0" tabClosingPolicy="UNAVAILABLE">
+            <tabs>
+                <Tab text="CRUD">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="384.0" prefWidth="751.0" style="-fx-background-color: #ADD8E6;">
+                            <children>
+                                <TableView fx:id="animalTableView" layoutX="229.0" layoutY="26.0" prefHeight="198.0" prefWidth="485.0" style="-fx-background-color: #F0F8FF;">
+                                    <columns>
+                                        <TableColumn fx:id="idColumn" prefWidth="75.0" text="Id" />
+                                        <TableColumn fx:id="idMedFileColumn" prefWidth="96.0" text="Id medical file" />
+                                        <TableColumn fx:id="animalColumn" prefWidth="86.0" text="Name" />
+                                        <TableColumn fx:id="speciesColumn" minWidth="0.0" prefWidth="124.0" text="Species" />
+                                        <TableColumn fx:id="weightColumn" prefWidth="103.0" text="Weight (kg)" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="26.0" layoutY="213.0" mnemonicParsing="false" onAction="#addNewAnimalClick" style="-fx-background-color: #87CEFA;" text="Add new animal" />
+                                <Button layoutX="543.0" layoutY="240.0" mnemonicParsing="false" onAction="#updateAnimalClick" style="-fx-background-color: #87CEFA;" text="Update" />
+                                <Button layoutX="543.0" layoutY="271.0" mnemonicParsing="false" onAction="#deleteAnimalClick" prefHeight="26.0" prefWidth="58.0" style="-fx-background-color: #87CEFA;" text="Delete" />
+                                <TextField fx:id="tfUpdateName" layoutX="371.0" layoutY="240.0" prefHeight="26.0" prefWidth="161.0" promptText="Edit name" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <TextField fx:id="tfUpdateSpecies" layoutX="372.0" layoutY="271.0" promptText="Edit species" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <TextField fx:id="tfUpdateWeight" layoutX="372.0" layoutY="302.0" promptText="Edit weight" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <TextField fx:id="tfChooseAnimalId" editable="false" layoutX="326.0" layoutY="240.0" prefHeight="26.0" prefWidth="34.0" promptText="Id" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <Button layoutX="645.0" layoutY="315.0" mnemonicParsing="false" onAction="#logoutClick" prefHeight="39.0" prefWidth="69.0" style="-fx-background-color: #0589ff;" text="Logout" textFill="WHITE" />
+                                <Button layoutX="26.0" layoutY="26.0" mnemonicParsing="false" onAction="#createNewMedFileClick" style="-fx-background-color: #87CEFA;" text="Create new medical file" />
+                                <TextField fx:id="tfNewAnimalName" layoutX="26.0" layoutY="96.0" promptText="New animal name" style="-fx-background-color: #F0F8FF;-fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <TextField fx:id="tfNewAnimalSpecies" layoutX="26.0" layoutY="134.0" promptText="New animal species" style="-fx-background-color: #F0F8FF;-fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <TextField fx:id="tfNewAnimalWeight" layoutX="26.0" layoutY="174.0" promptText="New animal weight" style="-fx-background-color: #F0F8FF;-fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <Label layoutX="229.0" layoutY="245.0" prefHeight="19.0" prefWidth="94.0" text="Update animal">
+                                    <font>
+                                        <Font name="JetBrains Mono Medium" size="12.0" />
+                                    </font>
+                                </Label>
+                                <PointLight layoutX="78.0" layoutY="80.0">
+                                    <color>
+                                        <Color red="0.20792214572429657" green="0.2697368562221527" blue="0.14610745012760162" />
+                                    </color>
+                                </PointLight>
+                                <TextField fx:id="tfNewId" editable="false" layoutX="26.0" layoutY="58.0" prefHeight="22.0" prefWidth="64.0" promptText="New id" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                                <Button layoutX="26.0" layoutY="253.0" mnemonicParsing="false" onAction="#refreshAnimalTableClick" prefHeight="26.0" prefWidth="103.0" style="-fx-background-color: #87CEFA;" text="Refresh table" />
+                                <TextField fx:id="tfIdMedFile" editable="false" layoutX="256.0" layoutY="271.0" prefHeight="26.0" prefWidth="104.0" promptText="Id medical file" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Filter animals">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ADD8E6;">
+                            <children>
+                                <Button layoutX="522.0" layoutY="22.0" mnemonicParsing="false" onAction="#searchClick" prefHeight="18.0" prefWidth="110.0" style="-fx-background-color: #87CEFA;" text="Filter" />
+                                <TableView fx:id="filterAnimalTableView" layoutX="19.0" layoutY="63.0" prefHeight="182.0" prefWidth="488.0" style="-fx-background-color: #F0F8FF;">
+                                    <columns>
+                                        <TableColumn fx:id="idFilterColumn" prefWidth="66.0" text="Id" />
+                                        <TableColumn fx:id="animalFilterColumn" prefWidth="123.0" text="Name" />
+                                        <TableColumn fx:id="speciesFilterColumn" prefWidth="157.0" text="Species" />
+                                        <TableColumn fx:id="weightFilterColumn" prefWidth="141.0" text="Weight (kg)" />
+                                    </columns>
+                                </TableView>
+                                <Button layoutX="40.0" layoutY="260.0" mnemonicParsing="false" onAction="#saveCSV" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #87CEFA;" text="Save as .csv" />
+                                <Button layoutX="41.0" layoutY="294.0" mnemonicParsing="false" onAction="#saveJSON" style="-fx-background-color: #87CEFA;" text="Save as .json" />
+                                <ComboBox fx:id="comboBoxFilterDoctor" layoutX="19.0" layoutY="21.0" prefWidth="150.0" promptText="Filter by doctor" />
+                                <ComboBox fx:id="comboboxFilterDiagnose" layoutX="186.0" layoutY="22.0" prefWidth="150.0" promptText="Filter by diagnose" />
+                                <ComboBox fx:id="comboboxFilterSpecies" layoutX="356.0" layoutY="22.0" prefWidth="150.0" promptText="Filter by species" />
+                                <Button layoutX="40.0" layoutY="328.0" mnemonicParsing="false" onAction="#saveXML" prefHeight="26.0" prefWidth="89.0" style="-fx-background-color: #87CEFA;" text="Save as .xml" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+                <Tab text="Make appointment">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ADD8E6;" />
+                    </content>
+                </Tab>
+                <Tab text="Statistics">
+                    <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ADD8E6;">
+                            <children>
+                                <PieChart fx:id="speciesChart" layoutX="14.0" layoutY="11.0" prefHeight="324.0" prefWidth="358.0" />
+                                <PieChart fx:id="diagnoseChart" layoutX="369.0" layoutY="14.0" prefHeight="318.0" prefWidth="358.0" />
+                            </children>
+                        </AnchorPane>
+                    </content>
+                </Tab>
+            </tabs>
+        </TabPane>
+    </children>
+</AnchorPane>

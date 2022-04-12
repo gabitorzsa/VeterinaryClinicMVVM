@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane prefHeight="400.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projecttema2ps.viewmodel.ViewModelLogin">
+    <children>
+        <BorderPane layoutY="-1.0" prefHeight="399.0" prefWidth="741.0">
+            <left>
+                <AnchorPane fx:id="anchorPane" prefHeight="399.0" prefWidth="236.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER">
+
+                </AnchorPane>
+            </left>
+            <right>
+                <AnchorPane prefHeight="399.0" prefWidth="236.0" style="-fx-background-color: #0589ff;" BorderPane.alignment="CENTER" />
+            </right>
+            <center>
+                <AnchorPane prefHeight="399.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+                    <children>
+                        <TextField fx:id="tfUsername" layoutX="55.0" layoutY="134.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0589ff; -fx-border-width: 0px 0px 2px 0px;" />
+                        <Button layoutX="101.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="40.0" prefWidth="68.0" style="-fx-background-color: #0589ff;" text="Login" textFill="WHITE" />
+                        <PasswordField fx:id="tfPassword" layoutX="55.0" layoutY="204.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #0589ff;" />
+                    </children>
+                </AnchorPane>
+            </center>
+        </BorderPane>
+    </children>
+</AnchorPane>

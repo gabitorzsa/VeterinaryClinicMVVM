@@ -1,0 +1,25 @@
+{
+  "Animals-data": [
+    {
+      "Animal_weight": 5.0,
+      "Animal_id": 3,
+      "Animal_Name": "Thor",
+      "Animal_Species": "Catlike",
+      "MedFile_id": 3
+    },
+    {
+      "Animal_weight": 3.7,
+      "Animal_id": 6,
+      "Animal_Name": "Hugo",
+      "Animal_Species": "Rodent",
+      "MedFile_id": 17
+    },
+    {
+      "Animal_weight": 1.4,
+      "Animal_id": 10,
+      "Animal_Name": "Zoro",
+      "Animal_Species": "Rodent",
+      "MedFile_id": 23
+    }
+  ]
+}
