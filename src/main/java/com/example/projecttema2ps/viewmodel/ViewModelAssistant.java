@@ -1,21 +1,16 @@
 package com.example.projecttema2ps.viewmodel;
-import com.fasterxml.jackson.databind.ObjectMapper;
-
+import com.example.projecttema2ps.model.Doctor;
+import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.model.Animal;
 import com.example.projecttema2ps.model.Consult;
-import com.example.projecttema2ps.model.MedicalFile;
 import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.dao.ConsultDAO;
 import com.example.projecttema2ps.viewmodel.command.commandsAssistant.*;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -80,6 +75,7 @@ public class ViewModelAssistant {
 
     public ConsultDAO consultDAO = new ConsultDAO();
     public AnimalDAO animalDAO = new AnimalDAO();
+    public DoctorDAO doctorDAO = new DoctorDAO();
 
     public void initialize() throws SQLException, IOException {
         animalTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
@@ -92,16 +88,19 @@ public class ViewModelAssistant {
 
         try {
             List<Consult> consultList = consultDAO.getConsults();
-            for (Consult consult : consultList) {
-                if (!comboBoxFilterDoctor.getItems().contains(consult.getIdDoctor())) {
-                    comboBoxFilterDoctor.getItems().add(consult.getIdDoctor());
+            List<Doctor> doctorList = doctorDAO.getDoctors();
+
+            for (Doctor doctor : doctorList) {
+                if (!comboBoxFilterDoctor.getItems().contains(doctor.getName())) {
+                    comboBoxFilterDoctor.getItems().add(doctor.getName());
                 }
+            }
+            for (Consult consult : consultList) {
                 if (!comboboxFilterDiagnose.getItems().contains(consult.getDiagnose())) {
                     comboboxFilterDiagnose.getItems().add(consult.getDiagnose());
                 }
             }
-            comboBoxFilterDoctor.getItems().add(0);
-//            comboBoxFilterDoctor.getItems().add(comboBoxFilterDoctor.getPromptText());
+            comboBoxFilterDoctor.getItems().add(comboBoxFilterDoctor.getPromptText());
             comboboxFilterDiagnose.getItems().add(comboboxFilterDiagnose.getPromptText());
         } catch (Exception e) {
             e.printStackTrace();
@@ -176,7 +175,6 @@ public class ViewModelAssistant {
         new SaveXMLCommand(this).execute();
     }
 
-
     ///////// getters ///////
     public String getTfEditAnimalName() {
         return tfUpdateName.getText();
@@ -202,10 +200,6 @@ public class ViewModelAssistant {
         return tfChooseAnimalId.getText();
     }
 
-    public TableView getAnimalTableView() {
-        return animalTableView;
-    }
-
     public String getTfNewAnimalName() {
         return tfNewAnimalName.getText();
     }
@@ -220,10 +214,6 @@ public class ViewModelAssistant {
 
     public TableView getFilterAnimalTableView() {
         return filterAnimalTableView;
-    }
-
-    private ObservableList<?> getColumns(TableView<?> table) {
-        return table.getColumns();
     }
 
 }

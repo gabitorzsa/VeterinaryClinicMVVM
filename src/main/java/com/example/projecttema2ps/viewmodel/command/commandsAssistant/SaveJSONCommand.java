@@ -7,6 +7,7 @@ import com.example.projecttema2ps.viewmodel.ViewModelAssistant;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
 import com.fasterxml.jackson.databind.util.JSONPObject;
 
+import javafx.scene.control.Alert;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
@@ -30,6 +31,14 @@ public class SaveJSONCommand implements ICommand {
 
     @Override
     public void execute() throws SQLException, IOException {
+        if(viewModelAssistant.getFilterAnimalTableView().getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid operation");
+            alert.setHeaderText("Empty table");
+            alert.setContentText("Please filter animals before exporting...");
+            alert.showAndWait();
+            return;
+        }
         AnimalDAO animalDAO = new AnimalDAO();
         List<Animal> animalList = new ArrayList<>();
         for(int i = 0; i < viewModelAssistant.getFilterAnimalTableView().getItems().size(); i++) {

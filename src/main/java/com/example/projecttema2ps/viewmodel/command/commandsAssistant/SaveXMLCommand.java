@@ -5,6 +5,7 @@ import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.util.DatabaseConnection;
 import com.example.projecttema2ps.viewmodel.ViewModelAssistant;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
+import javafx.scene.control.Alert;
 
 import javax.xml.stream.XMLOutputFactory;
 import javax.xml.stream.XMLStreamWriter;
@@ -30,18 +31,18 @@ public class SaveXMLCommand implements ICommand {
 
     @Override
     public void execute() throws SQLException, IOException {
-        AnimalDAO animalDAO = new AnimalDAO();
+        if(viewModelAssistant.getFilterAnimalTableView().getItems().isEmpty()) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid operation");
+            alert.setHeaderText("Empty table");
+            alert.setContentText("Please filter animals before exporting...");
+            alert.showAndWait();
+            return;
+        }
         List<Animal> animalList = new ArrayList<>();
         for (int i = 0; i < viewModelAssistant.getFilterAnimalTableView().getItems().size(); i++) {
             animalList.add((Animal) viewModelAssistant.getFilterAnimalTableView().getItems().get(i));
         }
-
-//        for(Animal animal : animalList)
-//            animalDAO.addFilteredAnimal(animal);
-//
-//        String query = "select * from animalFiltered";
-//        PreparedStatement ps=connection.prepareStatement(query);
-//        ResultSet rs=ps.executeQuery();
         try {
             XMLOutputFactory xmlOutputFactory = XMLOutputFactory.newFactory();
             XMLStreamWriter xmlStreamWriter = xmlOutputFactory.createXMLStreamWriter(new FileOutputStream("Animals.xml"));

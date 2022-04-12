@@ -2,8 +2,10 @@ package com.example.projecttema2ps.viewmodel.command.commandsAssistant;
 
 import com.example.projecttema2ps.model.Animal;
 import com.example.projecttema2ps.model.Consult;
+import com.example.projecttema2ps.model.Doctor;
 import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.dao.ConsultDAO;
+import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.viewmodel.ViewModelAssistant;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -24,12 +26,14 @@ public class ShowFilterAnimalClickCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         ConsultDAO consultDAO = new ConsultDAO();
         AnimalDAO animalDAO = new AnimalDAO();
+        DoctorDAO doctorDAO = new DoctorDAO();
         viewModelAssistant.filterAnimalTableView.getItems().clear();
 
         try {
             List<Consult> consultList = consultDAO.getConsults();
             List<Animal> animalList = animalDAO.getAnimals();
-            int selectedDoctorItem = (int) viewModelAssistant.comboBoxFilterDoctor.getSelectionModel().getSelectedItem();
+            List<Doctor> doctorList = doctorDAO.getDoctors();
+            String selectedDoctorItem = (String) viewModelAssistant.comboBoxFilterDoctor.getSelectionModel().getSelectedItem();
             String selectedDiagnoseItem = (String) viewModelAssistant.comboboxFilterDiagnose.getSelectionModel().getSelectedItem();
             String selectedSpeciesItem = (String) viewModelAssistant.comboboxFilterSpecies.getSelectionModel().getSelectedItem();
 
@@ -54,12 +58,14 @@ public class ShowFilterAnimalClickCommand implements ICommand {
                 }
             }
 
-            if (!viewModelAssistant.comboBoxFilterDoctor.getSelectionModel().getSelectedItem().equals(0)) {
+            if (!viewModelAssistant.comboBoxFilterDoctor.getSelectionModel().getSelectedItem().equals("Filter by doctor")) {
                 for (Animal animal : animalList) {
                     for (Consult consult : consultList) {
-                        if (consult.getIdDoctor() == selectedDoctorItem) {
-                            if (consult.getIdMedFile() == animal.getIdMedFile()) {
-                                populateTable(animal);
+                        for(Doctor doctor : doctorList) {
+                            if (consult.getIdDoctor() == doctor.getId() && doctor.getName().equals(selectedDoctorItem)) {
+                                if (consult.getIdMedFile() == animal.getIdMedFile()) {
+                                    populateTable(animal);
+                                }
                             }
                         }
                     }
