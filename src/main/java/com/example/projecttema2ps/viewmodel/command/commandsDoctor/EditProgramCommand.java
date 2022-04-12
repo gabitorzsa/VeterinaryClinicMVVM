@@ -4,6 +4,7 @@ import com.example.projecttema2ps.model.Doctor;
 import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.viewmodel.ViewModelDoctor;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -32,5 +33,11 @@ public class EditProgramCommand implements ICommand {
         doctor.setUsername(doctorDAO.getDoctor(doctor.getId()).getUsername());
         doctor.setPassword(doctorDAO.getDoctor(doctor.getId()).getPassword());
         doctorDAO.updateDoctor(doctor);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("");
+        alert.setHeaderText("");
+        alert.setContentText("To see the updates made please press 'Refresh table' button");
+        alert.showAndWait();
     }
 }

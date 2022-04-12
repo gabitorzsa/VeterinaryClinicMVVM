@@ -24,13 +24,17 @@ public class RefreshDoctorTableCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         DoctorDAO doctorDAO = new DoctorDAO();
         List<Doctor> doctorList = doctorDAO.getDoctors();
-        viewModelDoctor.workProgramTableView.getItems().clear();
+        viewModelDoctor.getWorkProgramTableView().getItems().clear();
         for (Doctor doctor : doctorList) {
-            viewModelDoctor.idWpColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            viewModelDoctor.nameWpColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            viewModelDoctor.startProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("startProgram"));
-            viewModelDoctor.endProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("endProgram"));
-            viewModelDoctor.workProgramTableView.getItems().add(doctor);
+            viewModelDoctor.getIdWpColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+            viewModelDoctor.getNameWpColumn().setCellValueFactory(new PropertyValueFactory<>("name"));
+            viewModelDoctor.getStartProgramWpColumn().setCellValueFactory(new PropertyValueFactory<>("startProgram"));
+            viewModelDoctor.getEndProgramWpColumn().setCellValueFactory(new PropertyValueFactory<>("endProgram"));
+            viewModelDoctor.getWorkProgramTableView().getItems().add(doctor);
+
+            viewModelDoctor.setTfIdToUpdate("");
+            viewModelDoctor.setTfEditEndProgram("");
+            viewModelDoctor.setTfEditStartProgram("");
         }
     }
 }

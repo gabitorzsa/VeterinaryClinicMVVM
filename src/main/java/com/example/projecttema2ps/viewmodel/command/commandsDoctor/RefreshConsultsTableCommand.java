@@ -22,16 +22,16 @@ public class RefreshConsultsTableCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         ConsultDAO consultDAO = new ConsultDAO();
         List<Consult> consultList = consultDAO.getConsults();
-        viewModelDoctor.consultsTable.getItems().clear();
-        int selectedItem = (Integer) viewModelDoctor.comboBoxMedicalFiles.getSelectionModel().getSelectedItem();
+        viewModelDoctor.getConsultsTable().getItems().clear();
+        int selectedItem = (Integer) viewModelDoctor.getComboBoxMedicalFiles().getSelectionModel().getSelectedItem();
         for (Consult consult : consultList) {
             if (consult.getIdMedFile() == selectedItem) {
-                viewModelDoctor.consultsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-                viewModelDoctor.consultIdDocColumn.setCellValueFactory(new PropertyValueFactory<>("idDoctor"));
-                viewModelDoctor.consultTreatmentColumn.setCellValueFactory(new PropertyValueFactory<>("treatment"));
-                viewModelDoctor.consultDiagnoseColumn.setCellValueFactory(new PropertyValueFactory<>("diagnose"));
-                viewModelDoctor.consultSymptomsColumn.setCellValueFactory(new PropertyValueFactory<>("symptoms"));
-                viewModelDoctor.consultsTable.getItems().add(consult);
+                viewModelDoctor.getConsultsIdColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+                viewModelDoctor.getConsultIdDocColumn().setCellValueFactory(new PropertyValueFactory<>("idDoctor"));
+                viewModelDoctor.getConsultTreatmentColumn().setCellValueFactory(new PropertyValueFactory<>("treatment"));
+                viewModelDoctor.getConsultDiagnoseColumn().setCellValueFactory(new PropertyValueFactory<>("diagnose"));
+                viewModelDoctor.getConsultSymptomsColumn().setCellValueFactory(new PropertyValueFactory<>("symptoms"));
+                viewModelDoctor.getConsultsTable().getItems().add(consult);
             }
         }
     }

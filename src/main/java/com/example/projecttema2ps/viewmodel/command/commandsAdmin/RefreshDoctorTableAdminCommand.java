@@ -21,16 +21,16 @@ public class RefreshDoctorTableAdminCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         DoctorDAO doctorDAO = new DoctorDAO();
         List<Doctor> doctorList = doctorDAO.getDoctors();
-        viewModelAdmin.doctorTableView.getItems().clear();
+        viewModelAdmin.getDoctorTableView().getItems().clear();
         for (Doctor doctor : doctorList) {
-            viewModelAdmin.idDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            viewModelAdmin.typeDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-            viewModelAdmin.nameDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            viewModelAdmin.startProgramColumn.setCellValueFactory(new PropertyValueFactory<>("startProgram"));
-            viewModelAdmin.endProgramColumn.setCellValueFactory(new PropertyValueFactory<>("endProgram"));
-            viewModelAdmin.usernameDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-            viewModelAdmin.passwordDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-            viewModelAdmin.doctorTableView.getItems().add(doctor);
+            viewModelAdmin.getIdDoctorColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+            viewModelAdmin.getTypeDoctorColumn().setCellValueFactory(new PropertyValueFactory<>("role"));
+            viewModelAdmin.getNameDoctorColumn().setCellValueFactory(new PropertyValueFactory<>("name"));
+            viewModelAdmin.getStartProgramColumn().setCellValueFactory(new PropertyValueFactory<>("startProgram"));
+            viewModelAdmin.getEndProgramColumn().setCellValueFactory(new PropertyValueFactory<>("endProgram"));
+            viewModelAdmin.getUsernameDoctorColumn().setCellValueFactory(new PropertyValueFactory<>("username"));
+            viewModelAdmin.getPasswordDoctorColumn().setCellValueFactory(new PropertyValueFactory<>("password"));
+            viewModelAdmin.getDoctorTableView().getItems().add(doctor);
 
             viewModelAdmin.setTfIdDoctor("");
             viewModelAdmin.setTfNameDoctor("");

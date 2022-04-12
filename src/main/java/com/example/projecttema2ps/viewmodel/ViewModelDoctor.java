@@ -1,152 +1,97 @@
 package com.example.projecttema2ps.viewmodel;
 
-import com.example.projecttema2ps.model.*;
-import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.dao.ConsultDAO;
 import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.model.jdbc.dao.MedicalFileDAO;
-import com.example.projecttema2ps.viewmodel.command.commandsAdmin.LogoutCommand;
 import com.example.projecttema2ps.viewmodel.command.commandsDoctor.*;
-import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.*;
-import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
-import java.net.URL;
 import java.sql.SQLException;
-import java.util.List;
-import java.util.ResourceBundle;
 
 public class ViewModelDoctor {
     // first tab
     @FXML
-    public TextField tfEditSymptoms;
+    private TextField tfEditSymptoms;
     @FXML
-    public TextField tfEditDiagnose;
+    private TextField tfEditDiagnose;
     @FXML
-    public TextField tfEditTreatment;
+    private TextField tfEditTreatment;
     @FXML
-    public ComboBox comboBoxMedicalFiles;
+    private ComboBox comboBoxMedicalFiles;
     @FXML
-    public TableView animalTable;
+    private TableView animalTable;
     @FXML
-    public TableColumn animalIDColumn;
+    private TableColumn animalIDColumn;
     @FXML
-    public TableColumn animalNameColumn;
+    private TableColumn animalNameColumn;
     @FXML
-    public TableColumn animalSpeciesColumn;
+    private TableColumn animalSpeciesColumn;
     @FXML
-    public TableColumn animalWeightColumn;
+    private TableColumn animalWeightColumn;
     @FXML
-    public TableView consultsTable;
+    private TableView consultsTable;
     @FXML
-    public TableColumn consultsIdColumn;
+    private TableColumn consultsIdColumn;
     @FXML
-    public TableColumn consultIdDocColumn;
+    private TableColumn consultIdDocColumn;
     @FXML
-    public TableColumn consultSymptomsColumn;
+    private TableColumn consultSymptomsColumn;
     @FXML
-    public TableColumn consultDiagnoseColumn;
+    private TableColumn consultDiagnoseColumn;
     @FXML
-    public TableColumn consultTreatmentColumn;
+    private TableColumn consultTreatmentColumn;
     @FXML
-    public TextField tfIdConsultToUpdate;
+    private TextField tfIdConsultToUpdate;
 
     // second tab
     @FXML
-    public ComboBox comboBoxFilterDiagnose;
+    private ComboBox comboBoxFilterDiagnose;
     @FXML
-    public ComboBox comboBoxFilterTreatment;
+    private ComboBox comboBoxFilterTreatment;
     @FXML
-    public TableView filterAnimalsTable;
+    private TableView filterAnimalsTable;
     @FXML
-    public TableColumn filterIdColumn;
+    private TableColumn filterIdColumn;
     @FXML
-    public TableColumn filterNameColumn;
+    private TableColumn filterNameColumn;
     @FXML
-    public TableColumn filterSpeciesColumn;
+    private TableColumn filterSpeciesColumn;
     @FXML
-    public TableColumn filterWeightColumn;
+    private TableColumn filterWeightColumn;
 
     // third tab
     @FXML
-    public TableView workProgramTableView;
+    private TableView workProgramTableView;
     @FXML
-    public TableColumn idWpColumn;
+    private TableColumn idWpColumn;
     @FXML
-    public TableColumn nameWpColumn;
+    private TableColumn nameWpColumn;
     @FXML
-    public TableColumn startProgramWpColumn;
+    private TableColumn startProgramWpColumn;
     @FXML
-    public TableColumn endProgramWpColumn;
+    private TableColumn endProgramWpColumn;
     @FXML
-    public TextField tfEditStartProgram;
+    private TextField tfEditStartProgram;
     @FXML
-    public TextField tfIdToUpdate;
+    private TextField tfIdToUpdate;
     @FXML
-    public TextField tfEditEndProgram;
+    private TextField tfEditEndProgram;
     @FXML
-    public TableView consultsTableView;
+    private TableView consultsTableView;
     @FXML
-    public TableColumn dateColumn;
+    private TableColumn dateColumn;
     @FXML
-    public TableColumn hourColumn;
+    private TableColumn hourColumn;
 
-    MedicalFileDAO medicalFileDAO = new MedicalFileDAO();
-    AnimalDAO animalDAO = new AnimalDAO();
-    ConsultDAO consultDAO = new ConsultDAO();
-    DoctorDAO doctorDAO = new DoctorDAO();
+    private MedicalFileDAO medicalFileDAO = new MedicalFileDAO();
+    private ConsultDAO consultDAO = new ConsultDAO();
+    private DoctorDAO doctorDAO = new DoctorDAO();
 
-    public void initialize() {
-        try {
-            List<MedicalFile> medicalFileList = medicalFileDAO.getMedicalFiles();
-            for (MedicalFile medicalFile : medicalFileList) {
-                comboBoxMedicalFiles.getItems().add(medicalFile.getId());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        try {
-            List<Consult> consultList = consultDAO.getConsults();
-            for (Consult consult : consultList) {
-                if (!comboBoxFilterDiagnose.getItems().contains(consult.getDiagnose()))
-                    comboBoxFilterDiagnose.getItems().add(consult.getDiagnose());
-                if (!comboBoxFilterTreatment.getItems().contains(consult.getTreatment()))
-                    comboBoxFilterTreatment.getItems().add(consult.getTreatment());
-            }
-            comboBoxFilterDiagnose.getItems().add("Filter by diagnose");
-            comboBoxFilterTreatment.getItems().add("Filter by treatment");
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        // third tab
-        try {
-            List<Doctor> doctorList = doctorDAO.getDoctors();
-            idWpColumn.setCellValueFactory(new PropertyValueFactory<>("Id"));
-            nameWpColumn.setCellValueFactory(new PropertyValueFactory<>("Name"));
-            startProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("startProgram"));
-            endProgramWpColumn.setCellValueFactory(new PropertyValueFactory<>("endProgram"));
-            consultsIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            dateColumn.setCellValueFactory(new PropertyValueFactory<>("date"));
-            hourColumn.setCellValueFactory(new PropertyValueFactory<>("hour"));
-            for (Doctor doctor : doctorList) {
-                workProgramTableView.getItems().add(doctor);
-            }
-
-            workProgramTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-                tfIdToUpdate.setText(Integer.toString(((Doctor) newVal).getId()));
-                tfEditStartProgram.setText(((Doctor) newVal).getStartProgram());
-                tfEditEndProgram.setText(((Doctor) newVal).getEndProgram());
-            });
-
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
+    public void initialize() throws SQLException, IOException {
+        new InitializeDoctorCommand(this).execute();
     }
 
     @FXML
@@ -191,6 +136,18 @@ public class ViewModelDoctor {
         new ViewConsultsCommand(this).execute();
     }
 
+    public MedicalFileDAO getMedicalFileDAO() {
+        return medicalFileDAO;
+    }
+
+    public ConsultDAO getConsultDAO() {
+        return consultDAO;
+    }
+
+    public DoctorDAO getDoctorDAO() {
+        return doctorDAO;
+    }
+
     public String getTfEditSymptoms() {
         return tfEditSymptoms.getText();
     }
@@ -233,6 +190,127 @@ public class ViewModelDoctor {
 
     public TableView getConsultsTable() {
         return consultsTable;
+    }
+
+    public TableColumn getDateColumn() {
+        return dateColumn;
+    }
+
+    public TableColumn getHourColumn() {
+        return hourColumn;
+    }
+
+    public void setTfEditSymptoms(String tfEditSymptoms) {
+        this.tfEditSymptoms.setText(tfEditSymptoms);
+    }
+
+    public void setTfEditDiagnose(String tfEditDiagnose) {
+        this.tfEditDiagnose.setText(tfEditDiagnose);
+    }
+
+    public void setTfEditTreatment(String tfEditTreatment) {
+        this.tfEditTreatment.setText(tfEditTreatment);
+    }
+
+    public void setTfIdConsultToUpdate(String tfIdConsultToUpdate) {
+        this.tfIdConsultToUpdate.setText(tfIdConsultToUpdate);
+    }
+
+    public void setTfEditStartProgram(String tfEditStartProgram) {
+        this.tfEditStartProgram.setText(tfEditStartProgram);
+    }
+
+    public void setTfIdToUpdate(String tfIdToUpdate) {
+        this.tfIdToUpdate.setText(tfIdToUpdate);
+    }
+
+    public void setTfEditEndProgram(String tfEditEndProgram) {
+        this.tfEditEndProgram.setText(tfEditEndProgram);
+    }
+
+    public ComboBox getComboBoxMedicalFiles() {
+        return comboBoxMedicalFiles;
+    }
+
+
+    public TableView getAnimalTable() {
+        return animalTable;
+    }
+
+    public TableColumn getAnimalIDColumn() {
+        return animalIDColumn;
+    }
+
+    public TableColumn getAnimalNameColumn() {
+        return animalNameColumn;
+    }
+
+    public TableColumn getAnimalSpeciesColumn() {
+        return animalSpeciesColumn;
+    }
+
+    public TableColumn getAnimalWeightColumn() {
+        return animalWeightColumn;
+    }
+
+    public TableColumn getConsultsIdColumn() {
+        return consultsIdColumn;
+    }
+
+    public TableColumn getConsultIdDocColumn() {
+        return consultIdDocColumn;
+    }
+
+    public TableColumn getConsultSymptomsColumn() {
+        return consultSymptomsColumn;
+    }
+
+    public TableColumn getConsultDiagnoseColumn() {
+        return consultDiagnoseColumn;
+    }
+
+    public TableColumn getConsultTreatmentColumn() {
+        return consultTreatmentColumn;
+    }
+
+    public TableColumn getFilterIdColumn() {
+        return filterIdColumn;
+    }
+
+    public TableColumn getFilterNameColumn() {
+        return filterNameColumn;
+    }
+
+    public TableColumn getFilterSpeciesColumn() {
+        return filterSpeciesColumn;
+    }
+
+    public TableColumn getFilterWeightColumn() {
+        return filterWeightColumn;
+    }
+
+    public TableView getWorkProgramTableView() {
+        return workProgramTableView;
+    }
+
+    public TableColumn getIdWpColumn() {
+        return idWpColumn;
+    }
+
+    public TableColumn getNameWpColumn() {
+        return nameWpColumn;
+    }
+
+    public TableColumn getStartProgramWpColumn() {
+        return startProgramWpColumn;
+    }
+
+    public TableColumn getEndProgramWpColumn() {
+        return endProgramWpColumn;
+    }
+
+    public TableView getConsultsTableView() {
+        return consultsTableView;
     }
 }
 

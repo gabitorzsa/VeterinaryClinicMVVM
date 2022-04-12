@@ -21,24 +21,24 @@ public class RefreshAnimalTableCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         AnimalDAO animalDAO = new AnimalDAO();
         List<Animal> animalList = animalDAO.getAnimals();
-        viewModelAssistant.animalTableView.getItems().clear();
+        viewModelAssistant.getAnimalTableView().getItems().clear();
         for (Animal animal : animalList) {
-            viewModelAssistant.idColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            viewModelAssistant.idMedFileColumn.setCellValueFactory(new PropertyValueFactory<>("idMedFile"));
-            viewModelAssistant.animalColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            viewModelAssistant.speciesColumn.setCellValueFactory(new PropertyValueFactory<>("species"));
-            viewModelAssistant.weightColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
-            viewModelAssistant.animalTableView.getItems().add(animal);
+            viewModelAssistant.getIdColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+            viewModelAssistant.getIdMedFileColumn().setCellValueFactory(new PropertyValueFactory<>("idMedFile"));
+            viewModelAssistant.getAnimalColumn().setCellValueFactory(new PropertyValueFactory<>("name"));
+            viewModelAssistant.getSpeciesColumn().setCellValueFactory(new PropertyValueFactory<>("species"));
+            viewModelAssistant.getWeightColumn().setCellValueFactory(new PropertyValueFactory<>("weight"));
+            viewModelAssistant.getAnimalTableView().getItems().add(animal);
         }
-        viewModelAssistant.tfNewId.setText("New id");
-        viewModelAssistant.tfNewAnimalName.setText("New animal name");
-        viewModelAssistant.tfNewAnimalSpecies.setText("New animal species");
-        viewModelAssistant.tfNewAnimalWeight.setText("New animal weight");
+        viewModelAssistant.setTfNewId("");
+        viewModelAssistant.setTfNewAnimalName("");
+        viewModelAssistant.setTfNewAnimalSpecies("");
+        viewModelAssistant.setTfNewAnimalWeight("");
 
-        viewModelAssistant.tfChooseAnimalId.setText("Id");
-        viewModelAssistant.tfIdMedFile.setText("Id medical file");
-        viewModelAssistant.tfUpdateName.setText("Edit name");
-        viewModelAssistant.tfUpdateSpecies.setText("Edit species");
-        viewModelAssistant.tfUpdateWeight.setText("Edit weight");
+        viewModelAssistant.setTfChooseAnimalId("");
+        viewModelAssistant.setTfIdMedFile("");
+        viewModelAssistant.setTfUpdateName("");
+        viewModelAssistant.setTfUpdateSpecies("");
+        viewModelAssistant.setTfUpdateWeight("");
     }
 }

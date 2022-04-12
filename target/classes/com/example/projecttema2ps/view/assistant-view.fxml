@@ -80,11 +80,19 @@
                     <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0" style="-fx-background-color: #ADD8E6;">
                      <children>
-                        <ComboBox fx:id="medFileAppointmentComboBox" layoutX="24.0" layoutY="21.0" prefWidth="150.0" promptText="Medical file ids" />
-                        <DatePicker fx:id="datePicker" layoutX="191.0" layoutY="22.0" />
-                        <Button layoutX="398.0" layoutY="23.0" mnemonicParsing="false" onAction="#createNewConsultClick" style="-fx-background-color: #87CEFA;" text="Create new consult" />
-                        <ComboBox fx:id="doctorAppointmentComboBox" layoutX="24.0" layoutY="60.0" prefWidth="150.0" promptText="Doctor ids" />
-                        <TextField fx:id="tfConsultHour" layoutX="191.0" layoutY="61.0" promptText="Choose consult hour" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;"  />
+                        <ComboBox fx:id="medFileAppointmentComboBox" layoutX="283.0" layoutY="14.0" prefWidth="151.0" promptText="Medical file ids" />
+                        <DatePicker fx:id="datePicker" layoutX="174.0" layoutY="82.0" prefHeight="26.0" prefWidth="161.0" promptText="Choose date " style="-fx-background-color: #F0F8FF;" />
+                        <Button layoutX="175.0" layoutY="171.0" mnemonicParsing="false" onAction="#createNewConsultClick" prefHeight="26.0" prefWidth="160.0" style="-fx-background-color: #87CEFA;" text="Create new consult" />
+                        <ComboBox fx:id="doctorAppointmentComboBox" layoutX="284.0" layoutY="43.0" prefWidth="150.0" promptText="Doctors" />
+                        <TextField fx:id="tfConsultHour" layoutX="174.0" layoutY="120.0" promptText="Choose consult hour" style="-fx-background-color: #F0F8FF; -fx-border-width: 0 0 2 0; -fx-border-color: black;" />
+                        <Label layoutX="32.0" layoutY="19.0" text="Choose medical file id to add new consult to:">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="32.0" layoutY="47.0" text="Choose doctor for new consult:" />
+                        <Label layoutX="32.0" layoutY="87.0" text="Select date :" />
+                        <Label layoutX="32.0" layoutY="125.0" text="Choose hour for consult:" />
                      </children></AnchorPane>
                     </content>
                 </Tab>

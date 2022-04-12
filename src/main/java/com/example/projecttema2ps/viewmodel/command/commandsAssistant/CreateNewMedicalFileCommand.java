@@ -24,6 +24,6 @@ public class CreateNewMedicalFileCommand implements ICommand {
         int id;
         List<MedicalFile> medicalFileList = medicalFileDAO.getMedicalFiles();
         id = medicalFileList.get(medicalFileList.size()-1).getId();
-        viewModelAssistant.tfNewId.setText(String.valueOf(id));
+        viewModelAssistant.setTfNewId(String.valueOf(id));
     }
 }

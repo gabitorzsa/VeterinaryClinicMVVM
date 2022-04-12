@@ -22,23 +22,25 @@ public class ShowFilterClickCommand implements ICommand {
 
     @Override
     public void execute() throws SQLException, IOException {
-        if(viewModelDoctor.getComboBoxFilterDiagnose().getSelectionModel().getSelectedItem().equals("Filter by diagnose")
+        if(viewModelDoctor.getComboBoxFilterTreatment().valueProperty().equals("Filter by treatment")
+                && viewModelDoctor.getComboBoxFilterDiagnose().valueProperty().equals("Filter by diagnose")
+                && viewModelDoctor.getComboBoxFilterDiagnose().getSelectionModel().getSelectedItem().equals("Filter by diagnose")
                 && viewModelDoctor.getComboBoxFilterTreatment().getSelectionModel().getSelectedItem().equals("Filter by treatment") ) {
+            viewModelDoctor.getFilterAnimalsTable().getItems().clear();
             Alert alert = new Alert(Alert.AlertType.INFORMATION);
             alert.setTitle("Invalid operation");
             alert.setHeaderText("Empty table");
             alert.setContentText("Please select option to filter animals");
             alert.showAndWait();
-            viewModelDoctor.filterAnimalsTable.getItems().clear();
             return;
         }
         ConsultDAO consultDAO = new ConsultDAO();
         AnimalDAO animalDAO = new AnimalDAO();
-        viewModelDoctor.filterAnimalsTable.getItems().clear();
+        viewModelDoctor.getFilterAnimalsTable().getItems().clear();
         try {
             List<Consult> consultList = consultDAO.getConsults();
             List<Animal> animalList = animalDAO.getAnimals();
-                String selectedDiagnoseItem = (String) viewModelDoctor.comboBoxFilterDiagnose.getSelectionModel().getSelectedItem();
+                String selectedDiagnoseItem = (String) viewModelDoctor.getComboBoxFilterDiagnose().getSelectionModel().getSelectedItem();
                 for (Consult consult : consultList) {
                     if (consult.getDiagnose().equals(selectedDiagnoseItem))
                         for (Animal animal : animalList) {
@@ -48,7 +50,7 @@ public class ShowFilterClickCommand implements ICommand {
                         }
                 }
 
-                String selectedTreatmentItem = (String) viewModelDoctor.comboBoxFilterTreatment.getSelectionModel().getSelectedItem();
+                String selectedTreatmentItem = (String) viewModelDoctor.getComboBoxFilterTreatment().getSelectionModel().getSelectedItem();
                 for (Consult consult : consultList) {
                     if (consult.getTreatment().equals(selectedTreatmentItem))
                         for (Animal animal : animalList) {
@@ -63,11 +65,11 @@ public class ShowFilterClickCommand implements ICommand {
     }
 
     public void populateTable(Animal animal) {
-        viewModelDoctor.filterIdColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        viewModelDoctor.filterNameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        viewModelDoctor.filterSpeciesColumn.setCellValueFactory(new PropertyValueFactory<>("species"));
-        viewModelDoctor.filterWeightColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        if (!viewModelDoctor.filterAnimalsTable.getItems().contains(animal))
-            viewModelDoctor.filterAnimalsTable.getItems().add(animal);
+        viewModelDoctor.getFilterIdColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+        viewModelDoctor.getFilterNameColumn().setCellValueFactory(new PropertyValueFactory<>("name"));
+        viewModelDoctor.getFilterSpeciesColumn().setCellValueFactory(new PropertyValueFactory<>("species"));
+        viewModelDoctor.getFilterWeightColumn().setCellValueFactory(new PropertyValueFactory<>("weight"));
+        if (!viewModelDoctor.getFilterAnimalsTable().getItems().contains(animal))
+            viewModelDoctor.getFilterAnimalsTable().getItems().add(animal);
     }
 }

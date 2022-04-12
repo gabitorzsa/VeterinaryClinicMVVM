@@ -1,1 +1,1 @@
-<?xml version='1.0' encoding='UTF-8'?><animals/>
+<?xml version='1.0' encoding='UTF-8'?><animals><animal id="2" idMedFile="2"><name>Lola</name><species>Catlike</species><weights>4.7</weights></animal><animal id="3" idMedFile="3"><name>Thor</name><species>Catlike</species><weights>5.0</weights></animal><animal id="19" idMedFile="27"><name>Kity</name><species>Catlike</species><weights>2.0</weights></animal><animal id="20" idMedFile="28"><name>Zizi</name><species>Catlike</species><weights>5.7</weights></animal></animals>

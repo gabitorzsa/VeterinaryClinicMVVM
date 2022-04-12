@@ -24,7 +24,7 @@ public class RefreshStatisticsCommand implements ICommand {
         int canineCount = 0;
         int catlikeCount = 0;
         int rodentCount = 0;
-        List<Animal> animalList = viewModelAssistant.animalDAO.getAnimals();
+        List<Animal> animalList = viewModelAssistant.getAnimalDAO().getAnimals();
         for (Animal animal : animalList) {
             if (animal.getSpecies().equals("Canine")) canineCount++;
             if (animal.getSpecies().equals("Catlike")) catlikeCount++;
@@ -34,18 +34,18 @@ public class RefreshStatisticsCommand implements ICommand {
                 new PieChart.Data("Canine", canineCount),
                 new PieChart.Data("Catlike", catlikeCount),
                 new PieChart.Data("Rodent", rodentCount));
-        viewModelAssistant.speciesChart.setData(pieChartSpecies);
-        viewModelAssistant.speciesChart.setTitle("Species statistics");
-        viewModelAssistant.speciesChart.setClockwise(true);
-        viewModelAssistant.speciesChart.setLabelLineLength(10);
-        viewModelAssistant.speciesChart.setLabelsVisible(true);
-        viewModelAssistant.speciesChart.setStartAngle(360);
+        viewModelAssistant.getSpeciesChart().setData(pieChartSpecies);
+        viewModelAssistant.getSpeciesChart().setTitle("Species statistics");
+        viewModelAssistant.getSpeciesChart().setClockwise(true);
+        viewModelAssistant.getSpeciesChart().setLabelLineLength(10);
+        viewModelAssistant.getSpeciesChart().setLabelsVisible(true);
+        viewModelAssistant.getSpeciesChart().setStartAngle(360);
 
         int cancerCount = 0;
         int intoxicationCount = 0;
         int allergyCount = 0;
         int injuryCount = 0;
-        List<Consult> consultList = viewModelAssistant.consultDAO.getConsults();
+        List<Consult> consultList = viewModelAssistant.getConsultDAO().getConsults();
         for(Consult consult : consultList) {
             if(consult.getDiagnose().equals("intoxication")) intoxicationCount++;
             if(consult.getDiagnose().equals("cancer")) cancerCount++;
@@ -59,11 +59,11 @@ public class RefreshStatisticsCommand implements ICommand {
                 new PieChart.Data("Allergy", allergyCount),
                 new PieChart.Data("Injury", injuryCount));
 
-        viewModelAssistant.diagnoseChart.setData(pieChartDiagnose);
-        viewModelAssistant.diagnoseChart.setTitle("Diagnose statistics");
-        viewModelAssistant.diagnoseChart.setClockwise(true);
-        viewModelAssistant.diagnoseChart.setLabelLineLength(10);
-        viewModelAssistant.diagnoseChart.setLabelsVisible(true);
-        viewModelAssistant.diagnoseChart.setStartAngle(360);
+        viewModelAssistant.getDiagnoseChart().setData(pieChartDiagnose);
+        viewModelAssistant.getDiagnoseChart().setTitle("Diagnose statistics");
+        viewModelAssistant.getDiagnoseChart().setClockwise(true);
+        viewModelAssistant.getDiagnoseChart().setLabelLineLength(10);
+        viewModelAssistant.getDiagnoseChart().setLabelsVisible(true);
+        viewModelAssistant.getDiagnoseChart().setStartAngle(360);
     }
 }

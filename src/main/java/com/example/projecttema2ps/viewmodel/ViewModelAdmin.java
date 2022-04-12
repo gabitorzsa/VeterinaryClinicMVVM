@@ -6,6 +6,7 @@ import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.model.jdbc.dao.UserDAO;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
 import com.example.projecttema2ps.viewmodel.command.commandsAdmin.*;
+import com.example.projecttema2ps.viewmodel.command.commandsDoctor.InitializeDoctorCommand;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -20,57 +21,74 @@ import java.sql.SQLException;
 import java.util.List;
 import java.util.ResourceBundle;
 
-public class ViewModelAdmin implements Initializable {
+public class ViewModelAdmin {
     // tab 1
     @FXML
-    public TableView usersTableView;
+    private TableView usersTableView;
     @FXML
-    public TableColumn idUserColumn;
+    private TableColumn idUserColumn;
     @FXML
-    public TableColumn typeUserColumn;
+    private TableColumn typeUserColumn;
     @FXML
-    public TableColumn nameUserColumn;
+    private TableColumn nameUserColumn;
     @FXML
-    public TableColumn usernameUserColumn;
+    private TableColumn usernameUserColumn;
     @FXML
-    public TableColumn passwordUserColumn;
+    private TableColumn passwordUserColumn;
     @FXML
-    public TextField tfId;
+    private TextField tfId;
     @FXML
-    public TextField tfType;
+    private TextField tfType;
     @FXML
-    public TextField tfName;
+    private TextField tfName;
     @FXML
-    public TextField tfUsername;
+    private TextField tfUsername;
     @FXML
-    public TextField tfPassword;
-
-//    public ICommand deleteUserCommand;
-//    public ICommand addUserCommand;
-//    public ICommand updateUserCommand;
-//    public ICommand logoutCommand;
+    private TextField tfPassword;
 
     // tab 2
-    @FXML public TableColumn idDoctorColumn;
-    @FXML public TableColumn typeDoctorColumn;
-    @FXML public TableColumn nameDoctorColumn;
-    @FXML public TableColumn startProgramColumn;
-    @FXML public TableColumn endProgramColumn;
-    @FXML public TableColumn usernameDoctorColumn;
-    @FXML public TableColumn passwordDoctorColumn;
-    @FXML public TextField tfIdDoctor;
-    @FXML public TextField tfNameDoctor;
-    @FXML public TextField tfUsernameDoctor;
-    @FXML public TextField tfPasswordDoctor;
-    @FXML public TextField tfTypeDoctor;
-    @FXML public TextField tfStartProgram;
-    @FXML public TextField tfEndProgram;
-    @FXML public TableView doctorTableView;
+    @FXML
+    private TableColumn idDoctorColumn;
+    @FXML
+    private TableColumn typeDoctorColumn;
+    @FXML
+    private TableColumn nameDoctorColumn;
+    @FXML
+    private TableColumn startProgramColumn;
+    @FXML
+    private TableColumn endProgramColumn;
+    @FXML
+    private TableColumn usernameDoctorColumn;
+    @FXML
+    private TableColumn passwordDoctorColumn;
+    @FXML
+    private TextField tfIdDoctor;
+    @FXML
+    private TextField tfNameDoctor;
+    @FXML
+    private TextField tfUsernameDoctor;
+    @FXML
+    private TextField tfPasswordDoctor;
+    @FXML
+    private TextField tfTypeDoctor;
+    @FXML
+    private TextField tfStartProgram;
+    @FXML
+    private TextField tfEndProgram;
+    @FXML
+    private TableView doctorTableView;
 
+    private UserDAO userDAO = new UserDAO();
+    private DoctorDAO doctorDAO = new DoctorDAO();
+
+
+    public void initialize() throws SQLException, IOException {
+        new InitializeAdminCommand(this).execute();
+    }
 
     @FXML
     public void saveUserClick(ActionEvent actionEvent) throws SQLException, IOException {
-        if(tfId.getText().isEmpty()) {
+        if (tfId.getText().isEmpty()) {
             new AddUserCommand(this).execute();
         } else {
             new UpdateUserCommand(this).execute();
@@ -84,7 +102,7 @@ public class ViewModelAdmin implements Initializable {
 
     @FXML
     public void saveDoctorClick(ActionEvent actionEvent) throws SQLException, IOException {
-        if(tfIdDoctor.getText().isEmpty()) {
+        if (tfIdDoctor.getText().isEmpty()) {
             new AddDoctorCommand(this).execute();
         } else {
             new UpdateDoctorCommand(this).execute();
@@ -110,64 +128,19 @@ public class ViewModelAdmin implements Initializable {
     public void refreshUsersTableClick(ActionEvent actionEvent) throws SQLException, IOException {
         new RefreshUserTableAdminCommand(this).execute();
     }
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // first tab
-        UserDAO userDAO = new UserDAO();
-        try {
-            List<User> userList = userDAO.getUsers();
-            idUserColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            typeUserColumn.setCellValueFactory(new PropertyValueFactory<>("Role"));
-            nameUserColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            usernameUserColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-            passwordUserColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
 
-            for (User user : userList) {
-                usersTableView.getItems().add(user);
-            }
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-
-        usersTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            tfId.setText(Integer.toString(((User)newVal).getId()));
-            tfType.setText(((User)newVal).getRole());
-            tfName.setText(((User)newVal).getName());
-            tfUsername.setText(((User)newVal).getUsername());
-            tfPassword.setText(((User)newVal).getPassword());
-
-        });
-
-        // second tab
-        DoctorDAO doctorDAO = new DoctorDAO();
-        try {
-            List<Doctor> doctorList = doctorDAO.getDoctors();
-            idDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            typeDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-            nameDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            startProgramColumn.setCellValueFactory(new PropertyValueFactory<>("startProgram"));
-            endProgramColumn.setCellValueFactory(new PropertyValueFactory<>("endProgram"));
-            usernameDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-            passwordDoctorColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-
-            for (Doctor doctor : doctorList) {
-                doctorTableView.getItems().add(doctor);
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        doctorTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            tfIdDoctor.setText(Integer.toString(((Doctor)newVal).getId()));
-            tfTypeDoctor.setText(((Doctor)newVal).getRole());
-            tfNameDoctor.setText(((Doctor)newVal).getName());
-            tfStartProgram.setText(((Doctor)newVal).getStartProgram());
-            tfEndProgram.setText(((Doctor)newVal).getEndProgram());
-            tfUsernameDoctor.setText(((Doctor)newVal).getUsername());
-            tfPasswordDoctor.setText(((Doctor)newVal).getPassword());
-
-        });
+    public TextField getTfIdDoctor() {
+        return tfIdDoctor;
     }
+
+    public UserDAO getUserDAO() {
+        return userDAO;
+    }
+
+    public DoctorDAO getDoctorDAO() {
+        return doctorDAO;
+    }
+
     public String getTfId() {
         return tfId.getText();
     }
@@ -225,7 +198,8 @@ public class ViewModelAdmin implements Initializable {
     }
 
     public void setTfName(String tfName) {
-        this.tfName.setText(tfName);;
+        this.tfName.setText(tfName);
+        ;
     }
 
     public void setTfUsername(String tfUsername) {
@@ -238,6 +212,11 @@ public class ViewModelAdmin implements Initializable {
 
     public void setTfIdDoctor(String tfIdDoctor) {
         this.tfIdDoctor.setText(tfIdDoctor);
+    }
+
+    public void setTfTypeDoctor(String tfTypeDoctor) {
+
+        this.tfIdDoctor.setText(tfTypeDoctor);
     }
 
     public void setTfNameDoctor(String tfNameDoctor) {
@@ -258,5 +237,61 @@ public class ViewModelAdmin implements Initializable {
 
     public void setTfEndProgram(String tfEndProgram) {
         this.tfEndProgram.setText(tfEndProgram);
+    }
+
+    public TableView getUsersTableView() {
+        return usersTableView;
+    }
+
+    public TableColumn getIdUserColumn() {
+        return idUserColumn;
+    }
+
+    public TableColumn getTypeUserColumn() {
+        return typeUserColumn;
+    }
+
+    public TableColumn getNameUserColumn() {
+        return nameUserColumn;
+    }
+
+    public TableColumn getUsernameUserColumn() {
+        return usernameUserColumn;
+    }
+
+    public TableColumn getPasswordUserColumn() {
+        return passwordUserColumn;
+    }
+
+    public TableColumn getIdDoctorColumn() {
+        return idDoctorColumn;
+    }
+
+    public TableColumn getTypeDoctorColumn() {
+        return typeDoctorColumn;
+    }
+
+    public TableColumn getNameDoctorColumn() {
+        return nameDoctorColumn;
+    }
+
+    public TableColumn getStartProgramColumn() {
+        return startProgramColumn;
+    }
+
+    public TableColumn getEndProgramColumn() {
+        return endProgramColumn;
+    }
+
+    public TableColumn getUsernameDoctorColumn() {
+        return usernameDoctorColumn;
+    }
+
+    public TableColumn getPasswordDoctorColumn() {
+        return passwordDoctorColumn;
+    }
+
+    public TableView getDoctorTableView() {
+        return doctorTableView;
     }
 }

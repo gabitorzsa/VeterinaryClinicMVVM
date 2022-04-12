@@ -1,14 +1,9 @@
 package com.example.projecttema2ps.viewmodel;
-import com.example.projecttema2ps.model.Doctor;
-import com.example.projecttema2ps.model.MedicalFile;
 import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
-import com.example.projecttema2ps.model.Animal;
-import com.example.projecttema2ps.model.Consult;
 import com.example.projecttema2ps.model.jdbc.dao.AnimalDAO;
 import com.example.projecttema2ps.model.jdbc.dao.ConsultDAO;
 import com.example.projecttema2ps.model.jdbc.dao.MedicalFileDAO;
 import com.example.projecttema2ps.viewmodel.command.commandsAssistant.*;
-import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.chart.PieChart;
@@ -16,132 +11,82 @@ import javafx.scene.control.*;
 
 import java.io.IOException;
 import java.sql.SQLException;
-import java.util.List;
 
 public class ViewModelAssistant {
     // first tab
     @FXML
-    public TableView animalTableView;
+    private TableView animalTableView;
     @FXML
-    public TableColumn idColumn;
+    private TableColumn idColumn;
     @FXML
-    public TableColumn animalColumn;
+    private TableColumn animalColumn;
     @FXML
-    public TableColumn speciesColumn;
+    private TableColumn speciesColumn;
     @FXML
-    public TableColumn weightColumn;
+    private TableColumn weightColumn;
     @FXML
-    public TextField tfNewAnimalName;
+    private TextField tfNewAnimalName;
     @FXML
-    public TextField tfNewAnimalSpecies;
+    private TextField tfNewAnimalSpecies;
     @FXML
-    public TextField tfNewAnimalWeight;
+    private TextField tfNewAnimalWeight;
     @FXML
-    public TextField tfUpdateName;
+    private TextField tfUpdateName;
     @FXML
-    public TextField tfUpdateSpecies;
+    private TextField tfUpdateSpecies;
     @FXML
-    public TextField tfUpdateWeight;
+    private TextField tfUpdateWeight;
     @FXML
-    public TextField tfChooseAnimalId;
+    private TextField tfChooseAnimalId;
     @FXML
-    public TextField tfNewId;
+    private TextField tfNewId;
     @FXML
-    public TableColumn idMedFileColumn;
+    private TableColumn idMedFileColumn;
     @FXML
-    public TextField tfIdMedFile;
+    private TextField tfIdMedFile;
 
     // second tab
     @FXML
-    public TableView filterAnimalTableView;
+    private TableView filterAnimalTableView;
     @FXML
-    public TableColumn idFilterColumn;
+    private TableColumn idFilterColumn;
     @FXML
-    public TableColumn animalFilterColumn;
+    private TableColumn animalFilterColumn;
     @FXML
-    public TableColumn speciesFilterColumn;
+    private TableColumn speciesFilterColumn;
     @FXML
-    public TableColumn weightFilterColumn;
+    private TableColumn weightFilterColumn;
     @FXML
-    public ComboBox comboBoxFilterDoctor;
+    private ComboBox comboBoxFilterDoctor;
     @FXML
-    public ComboBox comboboxFilterDiagnose;
+    private ComboBox comboboxFilterDiagnose;
     @FXML
-    public ComboBox comboboxFilterSpecies;
+    private ComboBox comboboxFilterSpecies;
 
     // tab 3
     @FXML
-    public ComboBox medFileAppointmentComboBox;
+    private ComboBox medFileAppointmentComboBox;
     @FXML
-    public DatePicker datePicker;
+    private DatePicker datePicker;
 
     // tab 4
     @FXML
-    public PieChart speciesChart;
+    private PieChart speciesChart;
     @FXML
-    public PieChart diagnoseChart;
+    private PieChart diagnoseChart;
     @FXML
-    public ComboBox doctorAppointmentComboBox;
+    private ComboBox doctorAppointmentComboBox;
     @FXML
-    public TextField tfConsultHour;
+    private TextField tfConsultHour;
 
-    public ConsultDAO consultDAO = new ConsultDAO();
-    public AnimalDAO animalDAO = new AnimalDAO();
-    public DoctorDAO doctorDAO = new DoctorDAO();
-    public MedicalFileDAO medicalFileDAO = new MedicalFileDAO();
+    private ConsultDAO consultDAO = new ConsultDAO();
+    private AnimalDAO animalDAO = new AnimalDAO();
+    private DoctorDAO doctorDAO = new DoctorDAO();
+    private MedicalFileDAO medicalFileDAO = new MedicalFileDAO();
 
     public void initialize() throws SQLException, IOException {
-        animalTableView.getSelectionModel().selectedItemProperty().addListener((obs, oldVal, newVal) -> {
-            tfChooseAnimalId.setText(Integer.toString(((Animal) newVal).getId()));
-            tfIdMedFile.setText(Integer.toString(((Animal) newVal).getIdMedFile()));
-            tfUpdateName.setText(((Animal) newVal).getName());
-            tfUpdateSpecies.setText(((Animal) newVal).getSpecies());
-            tfUpdateWeight.setText(Double.toString(((Animal) newVal).getWeight()));
-        });
+        new InitializeAssistantCommand(this).execute();
 
-        try {
-            List<Consult> consultList = consultDAO.getConsults();
-            List<Doctor> doctorList = doctorDAO.getDoctors();
-
-            for (Doctor doctor : doctorList) {
-                if (!comboBoxFilterDoctor.getItems().contains(doctor.getName())) {
-                    comboBoxFilterDoctor.getItems().add(doctor.getName());
-                }
-                if (!doctorAppointmentComboBox.getItems().contains(doctor.getId())) {
-                    doctorAppointmentComboBox.getItems().add(doctor.getId());
-                }
-            }
-            for (Consult consult : consultList) {
-                if (!comboboxFilterDiagnose.getItems().contains(consult.getDiagnose())) {
-                    comboboxFilterDiagnose.getItems().add(consult.getDiagnose());
-                }
-            }
-            comboBoxFilterDoctor.getItems().add(comboBoxFilterDoctor.getPromptText());
-            comboboxFilterDiagnose.getItems().add(comboboxFilterDiagnose.getPromptText());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        try {
-            List<Animal> animalList = animalDAO.getAnimals();
-            for (Animal animal : animalList) {
-                if (!comboboxFilterSpecies.getItems().contains(animal.getSpecies()))
-                    comboboxFilterSpecies.getItems().add(animal.getSpecies());
-            }
-            comboboxFilterSpecies.getItems().add(comboboxFilterSpecies.getPromptText());
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        refreshStatistics();
-
-        try {
-            List<MedicalFile> medicalFileList = medicalFileDAO.getMedicalFiles();
-            for (MedicalFile medicalFile : medicalFileList) {
-                medFileAppointmentComboBox.getItems().add(medicalFile.getId());
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
     }
 
     public void refreshStatistics() throws SQLException, IOException {
@@ -203,7 +148,22 @@ public class ViewModelAssistant {
         new CreateNewConsult(this).execute();
     }
 
-    ///////// getters ///////
+    public ConsultDAO getConsultDAO() {
+        return consultDAO;
+    }
+
+    public AnimalDAO getAnimalDAO() {
+        return animalDAO;
+    }
+
+    public DoctorDAO getDoctorDAO() {
+        return doctorDAO;
+    }
+
+    public MedicalFileDAO getMedicalFileDAO() {
+        return medicalFileDAO;
+    }
+
     public String getTfEditAnimalName() {
         return tfUpdateName.getText();
     }
@@ -211,7 +171,6 @@ public class ViewModelAssistant {
     public String getTfChooseHour() {
         return tfConsultHour.getText();
     }
-
 
     public String getTfNewId() {
         return tfNewId.getText();
@@ -247,5 +206,193 @@ public class ViewModelAssistant {
 
     public TableView getFilterAnimalTableView() {
         return filterAnimalTableView;
+    }
+
+    public void setTfNewAnimalName(String tfNewAnimalName) {
+        this.tfNewAnimalName.setText(tfNewAnimalName);
+    }
+
+    public void setTfNewAnimalSpecies(String tfNewAnimalSpecies) {
+        this.tfNewAnimalSpecies.setText(tfNewAnimalSpecies);
+    }
+
+    public void setTfNewAnimalWeight(String tfNewAnimalWeight) {
+        this.tfNewAnimalWeight.setText(tfNewAnimalWeight);
+    }
+
+    public void setTfUpdateName(String tfUpdateName) {
+        this.tfUpdateName.setText(tfUpdateName);
+    }
+
+    public void setTfUpdateSpecies(String tfUpdateSpecies) {
+        this.tfUpdateSpecies.setText(tfUpdateSpecies);
+    }
+
+    public void setTfUpdateWeight(String tfUpdateWeight) {
+        this.tfUpdateWeight.setText(tfUpdateWeight);
+    }
+
+    public void setTfChooseAnimalId(String tfChooseAnimalId) {
+        this.tfChooseAnimalId.setText(tfChooseAnimalId);
+    }
+
+    public void setTfNewId(String tfNewId) {
+        this.tfNewId.setText(tfNewId);
+    }
+
+    public void setTfIdMedFile(String tfIdMedFile) {
+        this.tfIdMedFile.setText(tfIdMedFile);
+    }
+
+    public void setTfConsultHour(String tfConsultHour) {
+        this.tfConsultHour.setText(tfConsultHour);
+    }
+
+    public TableView getAnimalTableView() {
+        return animalTableView;
+    }
+
+    public void setAnimalTableView(TableView animalTableView) {
+        this.animalTableView = animalTableView;
+    }
+
+    public TableColumn getIdColumn() {
+        return idColumn;
+    }
+
+    public void setIdColumn(TableColumn idColumn) {
+        this.idColumn = idColumn;
+    }
+
+    public TableColumn getAnimalColumn() {
+        return animalColumn;
+    }
+
+    public void setAnimalColumn(TableColumn animalColumn) {
+        this.animalColumn = animalColumn;
+    }
+
+    public TableColumn getSpeciesColumn() {
+        return speciesColumn;
+    }
+
+    public void setSpeciesColumn(TableColumn speciesColumn) {
+        this.speciesColumn = speciesColumn;
+    }
+
+    public TableColumn getWeightColumn() {
+        return weightColumn;
+    }
+
+    public void setWeightColumn(TableColumn weightColumn) {
+        this.weightColumn = weightColumn;
+    }
+
+    public TableColumn getIdMedFileColumn() {
+        return idMedFileColumn;
+    }
+
+    public void setIdMedFileColumn(TableColumn idMedFileColumn) {
+        this.idMedFileColumn = idMedFileColumn;
+    }
+
+    public void setFilterAnimalTableView(TableView filterAnimalTableView) {
+        this.filterAnimalTableView = filterAnimalTableView;
+    }
+
+    public TableColumn getIdFilterColumn() {
+        return idFilterColumn;
+    }
+
+    public void setIdFilterColumn(TableColumn idFilterColumn) {
+        this.idFilterColumn = idFilterColumn;
+    }
+
+    public TableColumn getAnimalFilterColumn() {
+        return animalFilterColumn;
+    }
+
+    public void setAnimalFilterColumn(TableColumn animalFilterColumn) {
+        this.animalFilterColumn = animalFilterColumn;
+    }
+
+    public TableColumn getSpeciesFilterColumn() {
+        return speciesFilterColumn;
+    }
+
+    public void setSpeciesFilterColumn(TableColumn speciesFilterColumn) {
+        this.speciesFilterColumn = speciesFilterColumn;
+    }
+
+    public TableColumn getWeightFilterColumn() {
+        return weightFilterColumn;
+    }
+
+    public void setWeightFilterColumn(TableColumn weightFilterColumn) {
+        this.weightFilterColumn = weightFilterColumn;
+    }
+
+    public ComboBox getComboBoxFilterDoctor() {
+        return comboBoxFilterDoctor;
+    }
+
+    public void setComboBoxFilterDoctor(ComboBox comboBoxFilterDoctor) {
+        this.comboBoxFilterDoctor = comboBoxFilterDoctor;
+    }
+
+    public ComboBox getComboboxFilterDiagnose() {
+        return comboboxFilterDiagnose;
+    }
+
+    public void setComboboxFilterDiagnose(ComboBox comboboxFilterDiagnose) {
+        this.comboboxFilterDiagnose = comboboxFilterDiagnose;
+    }
+
+    public ComboBox getComboboxFilterSpecies() {
+        return comboboxFilterSpecies;
+    }
+
+    public void setComboboxFilterSpecies(ComboBox comboboxFilterSpecies) {
+        this.comboboxFilterSpecies = comboboxFilterSpecies;
+    }
+
+    public ComboBox getMedFileAppointmentComboBox() {
+        return medFileAppointmentComboBox;
+    }
+
+    public void setMedFileAppointmentComboBox(ComboBox medFileAppointmentComboBox) {
+        this.medFileAppointmentComboBox = medFileAppointmentComboBox;
+    }
+
+    public DatePicker getDatePicker() {
+        return datePicker;
+    }
+
+    public void setDatePicker(DatePicker datePicker) {
+        this.datePicker = datePicker;
+    }
+
+    public PieChart getSpeciesChart() {
+        return speciesChart;
+    }
+
+    public void setSpeciesChart(PieChart speciesChart) {
+        this.speciesChart = speciesChart;
+    }
+
+    public PieChart getDiagnoseChart() {
+        return diagnoseChart;
+    }
+
+    public void setDiagnoseChart(PieChart diagnoseChart) {
+        this.diagnoseChart = diagnoseChart;
+    }
+
+    public ComboBox getDoctorAppointmentComboBox() {
+        return doctorAppointmentComboBox;
+    }
+
+    public void setDoctorAppointmentComboBox(ComboBox doctorAppointmentComboBox) {
+        this.doctorAppointmentComboBox = doctorAppointmentComboBox;
     }
 }

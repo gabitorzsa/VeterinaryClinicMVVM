@@ -27,18 +27,17 @@ public class ShowFilterAnimalClickCommand implements ICommand {
         ConsultDAO consultDAO = new ConsultDAO();
         AnimalDAO animalDAO = new AnimalDAO();
         DoctorDAO doctorDAO = new DoctorDAO();
-        viewModelAssistant.filterAnimalTableView.getItems().clear();
+        viewModelAssistant.getFilterAnimalTableView().getItems().clear();
 
         try {
             List<Consult> consultList = consultDAO.getConsults();
             List<Animal> animalList = animalDAO.getAnimals();
             List<Doctor> doctorList = doctorDAO.getDoctors();
-            String selectedDoctorItem = (String) viewModelAssistant.comboBoxFilterDoctor.getSelectionModel().getSelectedItem();
-            String selectedDiagnoseItem = (String) viewModelAssistant.comboboxFilterDiagnose.getSelectionModel().getSelectedItem();
-            String selectedSpeciesItem = (String) viewModelAssistant.comboboxFilterSpecies.getSelectionModel().getSelectedItem();
+            String selectedDoctorItem = (String) viewModelAssistant.getComboBoxFilterDoctor().getSelectionModel().getSelectedItem();
+            String selectedDiagnoseItem = (String) viewModelAssistant.getComboboxFilterDiagnose().getSelectionModel().getSelectedItem();
+            String selectedSpeciesItem = (String) viewModelAssistant.getComboboxFilterSpecies().getSelectionModel().getSelectedItem();
 
-
-            if (!viewModelAssistant.comboboxFilterDiagnose.valueProperty().equals("Filter by diagnose")) {
+            if (!viewModelAssistant.getComboboxFilterDiagnose().valueProperty().equals("Filter by diagnose")) {
                 for (Animal animal : animalList) {
                     for (Consult consult : consultList) {
                         if (consult.getDiagnose().equals(selectedDiagnoseItem)) {
@@ -50,7 +49,7 @@ public class ShowFilterAnimalClickCommand implements ICommand {
                 }
             }
 
-            if (!viewModelAssistant.comboboxFilterSpecies.valueProperty().equals("Filter by species")) {
+            if (!viewModelAssistant.getComboboxFilterSpecies().valueProperty().equals("Filter by species")) {
                 for (Animal animal : animalList) {
                     if (animal.getSpecies().equals(selectedSpeciesItem)) {
                         populateTable(animal);
@@ -58,7 +57,7 @@ public class ShowFilterAnimalClickCommand implements ICommand {
                 }
             }
 
-            if (!viewModelAssistant.comboBoxFilterDoctor.getSelectionModel().getSelectedItem().equals("Filter by doctor")) {
+            if (!viewModelAssistant.getComboBoxFilterDoctor().getSelectionModel().getSelectedItem().equals("Filter by doctor")) {
                 for (Animal animal : animalList) {
                     for (Consult consult : consultList) {
                         for(Doctor doctor : doctorList) {
@@ -78,12 +77,12 @@ public class ShowFilterAnimalClickCommand implements ICommand {
     }
 
     public void populateTable(Animal animal) {
-        viewModelAssistant.idFilterColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-        viewModelAssistant.animalFilterColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-        viewModelAssistant.speciesFilterColumn.setCellValueFactory(new PropertyValueFactory<>("species"));
-        viewModelAssistant.weightFilterColumn.setCellValueFactory(new PropertyValueFactory<>("weight"));
-        if (!viewModelAssistant.filterAnimalTableView.getItems().contains(animal))
-            viewModelAssistant.filterAnimalTableView.getItems().add(animal);
+        viewModelAssistant.getIdFilterColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+        viewModelAssistant.getAnimalFilterColumn().setCellValueFactory(new PropertyValueFactory<>("name"));
+        viewModelAssistant.getSpeciesFilterColumn().setCellValueFactory(new PropertyValueFactory<>("species"));
+        viewModelAssistant.getWeightFilterColumn().setCellValueFactory(new PropertyValueFactory<>("weight"));
+        if (!viewModelAssistant.getFilterAnimalTableView().getItems().contains(animal))
+            viewModelAssistant.getFilterAnimalTableView().getItems().add(animal);
     }
 }
 

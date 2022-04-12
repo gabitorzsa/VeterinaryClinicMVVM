@@ -2,24 +2,49 @@
 
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 
 <AnchorPane prefHeight="400.0" prefWidth="741.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.projecttema2ps.viewmodel.ViewModelLogin">
     <children>
         <BorderPane layoutY="-1.0" prefHeight="399.0" prefWidth="741.0">
             <left>
                 <AnchorPane fx:id="anchorPane" prefHeight="399.0" prefWidth="236.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
-
-                </AnchorPane>
+               <children>
+                  <Label layoutX="68.0" layoutY="150.0" text="WELCOME">
+                     <font>
+                        <Font name="AppleMyungjo Regular" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="103.0" layoutY="187.0" text="TO">
+                     <font>
+                        <Font name="AppleMyungjo Regular" size="19.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="17.0" layoutY="224.0" text="VETERINARY CLINIC">
+                     <font>
+                        <Font name="AppleMyungjo Regular" size="19.0" />
+                     </font>
+                  </Label>
+               </children></AnchorPane>
             </left>
             <right>
-                <AnchorPane prefHeight="399.0" prefWidth="236.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER" />
+                <AnchorPane prefHeight="503.0" prefWidth="245.0" style="-fx-background-color: #ADD8E6;" BorderPane.alignment="CENTER">
+               <children>
+                  <Label layoutX="13.0" layoutY="189.0" text="Where paws are in good hands" textAlignment="CENTER">
+                     <font>
+                        <Font name="AppleMyungjo Regular" size="16.0" />
+                     </font>
+                  </Label>
+                  <Label layoutX="22.0" layoutY="172.0" text="------------------------------------" />
+                  <Label layoutX="22.0" layoutY="211.0" text="------------------------------------" />
+               </children></AnchorPane>
             </right>
             <center>
-                <AnchorPane prefHeight="399.0" prefWidth="337.0" BorderPane.alignment="CENTER">
+                <AnchorPane prefHeight="407.0" prefWidth="262.0" BorderPane.alignment="CENTER">
                     <children>
-                        <TextField fx:id="tfUsername" layoutX="55.0" layoutY="134.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0589ff; -fx-border-width: 0px 0px 2px 0px;" />
-                        <Button layoutX="101.0" layoutY="261.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="40.0" prefWidth="68.0" style="-fx-background-color: #0589ff;" text="Login" textFill="WHITE" />
-                        <PasswordField fx:id="tfPassword" layoutX="55.0" layoutY="204.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #0589ff;" />
+                        <TextField fx:id="tfUsername" layoutX="50.0" layoutY="133.0" promptText="Username" style="-fx-background-color: transparent; -fx-border-color: #0047AB; -fx-border-width: 0px 0px 2px 0px;" />
+                        <Button layoutX="96.0" layoutY="260.0" mnemonicParsing="false" onAction="#loginClick" prefHeight="40.0" prefWidth="68.0" style="-fx-background-color: #0047AB;" text="Login" textFill="WHITE" />
+                        <PasswordField fx:id="tfPassword" layoutX="50.0" layoutY="200.0" promptText="Password" style="-fx-background-color: transparent; -fx-border-width: 0 0 2 0; -fx-border-color: #0047AB;" />
                     </children>
                 </AnchorPane>
             </center>

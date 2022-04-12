@@ -6,6 +6,7 @@ import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.model.jdbc.dao.UserDAO;
 import com.example.projecttema2ps.viewmodel.ViewModelAdmin;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
+import javafx.scene.control.Alert;
 import javafx.scene.control.cell.PropertyValueFactory;
 
 import java.io.IOException;
@@ -23,14 +24,26 @@ public class RefreshUserTableAdminCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         UserDAO userDAO = new UserDAO();
         List<User> userList = userDAO.getUsers();
-        viewModelAdmin.usersTableView.getItems().clear();
+        viewModelAdmin.getUsersTableView().getItems().clear();
+        if(viewModelAdmin.getTfUsername().equals("")
+                || viewModelAdmin.getTfPassword().equals("")
+                || viewModelAdmin.getTfId().equals("")
+                || viewModelAdmin.getTfType().equals("")
+                || viewModelAdmin.getTfName().equals("")
+        ) {
+            Alert alert = new Alert(Alert.AlertType.INFORMATION);
+            alert.setTitle("Invalid operation");
+            alert.setHeaderText("Empty fields");
+            alert.setContentText("Please select/enter info into fields");
+            alert.showAndWait();
+        }
         for (User user : userList) {
-            viewModelAdmin.idUserColumn.setCellValueFactory(new PropertyValueFactory<>("id"));
-            viewModelAdmin.typeUserColumn.setCellValueFactory(new PropertyValueFactory<>("role"));
-            viewModelAdmin.nameUserColumn.setCellValueFactory(new PropertyValueFactory<>("name"));
-            viewModelAdmin.usernameUserColumn.setCellValueFactory(new PropertyValueFactory<>("username"));
-            viewModelAdmin.passwordUserColumn.setCellValueFactory(new PropertyValueFactory<>("password"));
-            viewModelAdmin.usersTableView.getItems().add(user);
+            viewModelAdmin.getIdUserColumn().setCellValueFactory(new PropertyValueFactory<>("id"));
+            viewModelAdmin.getTypeUserColumn().setCellValueFactory(new PropertyValueFactory<>("role"));
+            viewModelAdmin.getNameUserColumn().setCellValueFactory(new PropertyValueFactory<>("name"));
+            viewModelAdmin.getUsernameUserColumn().setCellValueFactory(new PropertyValueFactory<>("username"));
+            viewModelAdmin.getPasswordUserColumn().setCellValueFactory(new PropertyValueFactory<>("password"));
+            viewModelAdmin.getUsersTableView().getItems().add(user);
 
             viewModelAdmin.setTfId("");
             viewModelAdmin.setTfName("");

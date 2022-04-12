@@ -4,6 +4,7 @@ import com.example.projecttema2ps.Main;
 import com.example.projecttema2ps.model.jdbc.dao.DoctorDAO;
 import com.example.projecttema2ps.viewmodel.ViewModelAdmin;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -20,7 +21,10 @@ public class DeleteDoctorCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         DoctorDAO doctorDAO = new DoctorDAO();
         doctorDAO.deleteDoctor(Integer.parseInt(viewModelAdmin.getTfDoctorId()));
-        Main main = new Main();
-        main.changeScene("view/admin-view.fxml", "Admin");
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("");
+        alert.setHeaderText("");
+        alert.setContentText("To see the updates made please press 'Refresh table' button");
+        alert.showAndWait();
     }
 }

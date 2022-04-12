@@ -20,7 +20,7 @@ public class AddNewAnimalCommand implements ICommand {
     public void execute() throws SQLException, IOException {
         AnimalDAO animalDAO = new AnimalDAO();
         Animal newAnimal = new Animal();
-        newAnimal.setIdMedFile(Integer.parseInt(viewModelAssistant.tfNewId.getText()));
+        newAnimal.setIdMedFile(Integer.parseInt(viewModelAssistant.getTfNewId()));
         newAnimal.setName(viewModelAssistant.getTfNewAnimalName());
         newAnimal.setSpecies(viewModelAssistant.getTfNewAnimalSpecies());
         newAnimal.setWeight(Double.parseDouble(viewModelAssistant.getTfNewAnimalWeight()));

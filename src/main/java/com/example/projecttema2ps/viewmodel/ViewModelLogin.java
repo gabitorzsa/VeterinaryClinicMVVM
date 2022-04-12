@@ -17,9 +17,9 @@ import java.sql.SQLException;
 
 public class ViewModelLogin {
     @FXML
-    TextField tfUsername;
+    private TextField tfUsername;
     @FXML
-    TextField tfPassword;
+    private TextField tfPassword;
 
     @FXML
     private void loginClick(ActionEvent event) throws SQLException, IOException {

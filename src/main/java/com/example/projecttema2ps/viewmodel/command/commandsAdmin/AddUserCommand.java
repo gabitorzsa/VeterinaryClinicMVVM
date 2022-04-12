@@ -5,6 +5,7 @@ import com.example.projecttema2ps.model.User;
 import com.example.projecttema2ps.model.jdbc.dao.UserDAO;
 import com.example.projecttema2ps.viewmodel.ViewModelAdmin;
 import com.example.projecttema2ps.viewmodel.command.ICommand;
+import javafx.scene.control.Alert;
 
 import java.io.IOException;
 import java.sql.SQLException;
@@ -26,5 +27,11 @@ public class AddUserCommand implements ICommand {
         newUser.setUsername(viewModelAdmin.getTfUsername());
         newUser.setPassword(viewModelAdmin.getTfPassword());
         userDAO.addUser(newUser);
+
+        Alert alert = new Alert(Alert.AlertType.INFORMATION);
+        alert.setTitle("");
+        alert.setHeaderText("");
+        alert.setContentText("To see the updates made please press 'Refresh table' button");
+        alert.showAndWait();
     }
 }
